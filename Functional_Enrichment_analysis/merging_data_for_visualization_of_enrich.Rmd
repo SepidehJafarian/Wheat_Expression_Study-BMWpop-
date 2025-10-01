@@ -1,0 +1,130 @@
+---
+title: "mergin_data_for_enrich_for_Visuallization-treatments"
+author: "Sepideh"
+date: "2024-06-24"
+output:
+  toc: yes
+    toc_depth: '3'
+    df_print: paged
+  rmarkdown::html_document:
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+    toc_depth: 3
+    number_sections: yes
+editor_options:
+  chunk_output_type: inline
+  root.dir:"C:/Users/SepidehJafarian/Desktop/Enrichment_transcriptomes_data/Treatments/Enrich_treatments_real_data_dropped"
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(htmlwidgets)
+library(ggBubbles)
+library(magrittr)
+library(plotly)
+library(knitr)
+set.seed(120)
+```
+
+```{r , include=FALSE}
+wd="C:/Users/SepidehJafarian/Desktop/Enrichment_transcriptomes_data/Treatments/Enrich_treatments_real_data_dropped"
+```
+
+# Define a function to read and label data
+
+```{r , include=FALSE}
+read_and_label <- function(file, regulation) {
+  df <- read_csv(file)
+  df <- df %>% mutate(Regulation = regulation)
+  return(df)
+}
+```
+
+
+# List of CSV files
+```{r , include=FALSE}
+csv_files <- list.files(pattern = "*.csv")
+```
+
+
+
+
+```{r , include=FALSE}
+combined_data <- bind_rows(
+  read_and_label("level2_up_regulated_Mercator_clusterprof.csv", "Up"),
+  read_and_label("level3_up_regulated_Mercator_clusterprof.csv", "Up"),
+  read_and_label("level4_up_regulated_Mercator_clusterprof.csv", "Up"),
+  read_and_label("level5_up_regulated_Mercator_clusterprof.csv", "Up"),
+  read_and_label("level6_up_regulated_Mercator_clusterprof.csv", "Up"),
+  read_and_label("level7_up_regulated_Mercator_clusterprof.csv", "Up"),
+   
+  read_and_label("level2_down_regulated_Mercator_clusterprof.csv", "Down"),
+  read_and_label("level3_down_regulated_Mercator_clusterprof.csv", "Down"),
+  read_and_label("level4_down_regulated_Mercator_clusterprof.csv", "Down"),
+  read_and_label("level5_down_regulated_Mercator_clusterprof.csv", "Down"),
+  read_and_label("level6_down_regulated_Mercator_clusterprof.csv", "Down"),
+  read_and_label("level7_down_regulated_Mercator_clusterprof.csv", "Down")
+  
+)
+```
+
+
+
+
+# Process the GeneRatio column to get numeric values
+```{r , include=FALSE}
+combined_data <- combined_data %>%
+  mutate(GeneRatio = as.numeric(sub("/.*", "", GeneRatio)) / as.numeric(sub(".*/", "", GeneRatio)))
+
+combined_data$Count <- as.numeric(combined_data$Count)
+
+head(combined_data)
+```
+
+
+```{r , include=FALSE}
+regulation_labels <- c(Up = "Up-regulated", Down = "Down-regulated")
+```
+
+```{r , include=FALSE}
+
+png(file = paste(wd, "enrichment_up_&_down.png", sep='/'),width=18,height=20,units="in",res=1200)
+graph<- ggplot(combined_data, aes(x = GeneRatio, y = Description)) +
+  geom_point(aes(size = Count, color = pvalue)) +
+  facet_wrap(~ Regulation, scales = "free_x", labeller = labeller(Regulation = regulation_labels)) +
+  scale_color_gradient(low = "red", high = "blue") +
+  theme_bw() +
+  theme(axis.text.x=element_text(colour="black"),
+         axis.text.y=  element_text(colour= "black"))+
+   theme(axis.text.x =element_text(size = 12))+
+  theme(text = element_text(size = 12),
+        strip.text = element_text(size = 13))+
+  theme(axis.text.y =element_text(size = 9))+
+  labs(title = "Enrichment Analysis for the comparison between drought stress vs control condition",
+       x = "Gene Ratio",
+       y = "Description",
+       size = "Gene Count",
+       color = "p-value")
+print(graph)
+dev.off()
+
+```
+
+
+#```{r , include=FALSE}
+options(repr.plot.width=15,  repr.plot.height=40)
+output_file <- paste(wd, "enrichment_up_and_down.html", sep = '/')
+interactive_graph <- ggplotly(graph)
+print(graph)
+interactive_graph <- plotly_build(interactive_graph) %>%
+  layout(width = 1200, height = 1800)
+saveWidget(interactive_graph, output_file)
+
+#```
+
+
+
+

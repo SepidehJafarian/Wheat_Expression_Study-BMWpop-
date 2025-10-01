@@ -1,0 +1,1192 @@
+component alpha *(PsbE),TraesCS5A02G523400
+component alpha *(PsbE),TraesCS5D02G220600
+component alpha *(PsbE),TraesCS5D02G564200
+component alpha *(PsbE),TraesCS6A02G020700
+component alpha *(PsbE),TraesCS6A02G020800
+component alpha *(PsbE),TraesCS6B02G232900
+component alpha *(PsbE),TraesCS6B02G233100
+component alpha *(PsbE),TraesCS6D02G325800
+component alpha *(PsbE),TraesCS6D02G374500
+component alpha *(PsbE),TraesCS7A02G098400
+component alpha *(PsbE),TraesCS7A02G099600
+component alpha *(PsbE),TraesCS7A02G388000
+component alpha *(PsbE),TraesCS7B02G120000
+component alpha *(PsbE),TraesCS7B02G456700
+component alpha *(PsbE),TraesCS7B02G458600
+component alpha *(PsbE),TraesCS7B02G487200
+component alpha *(PsbE),TraesCS7D02G286100
+component alpha *(PsbE),TraesCS7D02G301700
+component beta *(PsbF),TraesCS5A02G523300
+component beta *(PsbF),TraesCS5D02G220700
+component beta *(PsbF),TraesCS6D02G137500
+component beta *(PsbF),TraesCS6D02G325700
+regulatory protein *(FLAP1),TraesCS7A02G315700
+regulatory protein *(FLAP1),TraesCS7A02G501700
+regulatory protein *(FLAP1),TraesCS7B02G216700
+regulatory protein *(FLAP1),TraesCS7B02G409100
+regulatory protein *(FLAP1),TraesCS7D02G312700
+regulatory protein *(FLAP1),TraesCS7D02G312800
+regulatory protein *(FLAP1),TraesCS7D02G489100
+regulatory protein *(DLDG1),TraesCS7A02G286400
+regulatory protein *(DLDG1),TraesCS7B02G196800
+regulatory protein *(DLDG1),TraesCS7D02G283700
+regulatory protein *(NPQ7),TraesCS5A02G174900
+regulatory protein *(NPQ7),TraesCS5B02G174100
+regulatory protein *(NPQ7),TraesCS5D02G181100
+regulatory protein *(ROQH1),TraesCS6B02G093300
+subunit alpha,TraesCS5A02G366800
+subunit alpha,TraesCS5B02G368900
+subunit alpha,TraesCS5B02G563900
+subunit alpha,TraesCS5D02G376000
+subunit alpha,TraesCS5D02G550700
+subunit beta,TraesCS6A02G006400
+subunit beta,TraesCS6A02G028100
+subunit beta,TraesCS6B02G011800
+subunit beta,TraesCS6B02G012000
+subunit beta,TraesCS6B02G039300
+subunit beta,TraesCS6D02G009100
+subunit beta,TraesCS6D02G031400
+subunit beta,TraesCS7A02G036200
+subunit beta,TraesCS7D02G032800
+7),TraesCS5A02G173600
+7),TraesCS5B02G171000
+7),TraesCS5D02G178100
+7),TraesCS6A02G280600
+7),TraesCS6B02G308900
+7),TraesCS6D02G260800
+component *(UPS2),TraesCS5A02G263400
+component *(UPS2),TraesCS5B02G262700
+component *(UPS2),TraesCS5D02G271000
+component *(UPS2),TraesCS6A02G281500
+component *(UPS2),TraesCS6B02G310300
+component *(UPS2),TraesCS6D02G262200
+component *(Mdm35),TraesCS5A02G194000
+component *(Mdm35),TraesCS5B02G189300
+component *(Mdm35),TraesCS5D02G196400
+component *(Mic10),TraesCS5B02G525500
+component *(Mic10),TraesCS5D02G524700
+P4-type ATPase component *(ALA),TraesCS7A02G231600
+P4-type ATPase component *(ALA),TraesCS7A02G360700
+P4-type ATPase component *(ALA),TraesCS7B02G130000
+P4-type ATPase component *(ALA),TraesCS7B02G267000
+P4-type ATPase component *(ALA),TraesCS7D02G231800
+P4-type ATPase component *(ALA),TraesCS7D02G362300
+regulatory component *(ALIS),TraesCS5A02G380500
+regulatory component *(ALIS),TraesCS5A02G423800
+regulatory component *(ALIS),TraesCS5A02G519200
+regulatory component *(ALIS),TraesCS5B02G384100
+regulatory component *(ALIS),TraesCS5B02G426100
+regulatory component *(ALIS),TraesCS5D02G390300
+regulatory component *(ALIS),TraesCS5D02G432300
+regulatory component *(ALIS),TraesCS6A02G155600
+regulatory component *(ALIS),TraesCS6B02G183800
+regulatory component *(ALIS),TraesCS6D02G145600
+regulatory component *(ALIS),TraesCS7A02G482200
+regulatory component *(ALIS),TraesCS7B02G384400
+regulatory component *(ALIS),TraesCS7D02G469100
+VRN/FIS/EMF core subcomplexes,TraesCS5B02G378700
+VRN/FIS/EMF core subcomplexes,TraesCS5D02G385600
+VRN/FIS/EMF core subcomplexes,TraesCS7A02G089100
+VRN/FIS/EMF core subcomplexes,TraesCS7A02G089200
+VRN/FIS/EMF core subcomplexes,TraesCS7A02G308300
+VRN/FIS/EMF core subcomplexes,TraesCS7D02G084500
+VRN/FIS/EMF core subcomplexes,TraesCS7D02G305100
+VRN/FIS/EMF core subcomplexes,TraesCS5A02G179600
+VRN/FIS/EMF core subcomplexes,TraesCS5B02G177400
+VRN/FIS/EMF core subcomplexes,TraesCS7A02G128300
+VRN/FIS/EMF core subcomplexes,TraesCS7A02G128600
+VRN/FIS/EMF core subcomplexes,TraesCS7B02G028200
+VRN/FIS/EMF core subcomplexes,TraesCS7B02G028500
+VRN/FIS/EMF core subcomplexes,TraesCS7D02G127100
+VRN/FIS/EMF core subcomplexes,TraesCS7D02G127400
+associated protein factors,TraesCS5A02G041500
+associated protein factors,TraesCS5A02G375400
+associated protein factors,TraesCS5B02G043100
+associated protein factors,TraesCS5B02G377500
+associated protein factors,TraesCS5D02G048400
+associated protein factors,TraesCS5D02G385000
+associated protein factors,TraesCS5A02G097100
+associated protein factors,TraesCS5B02G102800
+associated protein factors,TraesCS5D02G109600
+associated protein factors,TraesCS6A02G123400
+associated protein factors,TraesCS6B02G151600
+associated protein factors,TraesCS6D02G113600
+associated protein factors,TraesCS7A02G433000
+associated protein factors,TraesCS7D02G424600
+associated protein factors,TraesCS5A02G154000
+associated protein factors,TraesCS5B02G152700
+associated protein factors,TraesCS5D02G159200
+associated protein factors,TraesCS6A02G268700
+associated protein factors,TraesCS6B02G295800
+associated protein factors,TraesCS6D02G246200
+deacetylase component *(HDA19),TraesCS6A02G181100
+deacetylase component *(HDA6),TraesCS6A02G181100
+deacetylase component *(HDA19),TraesCS6A02G184100
+deacetylase component *(HDA19),TraesCS6B02G210200
+deacetylase component *(HDA6),TraesCS6B02G210200
+deacetylase component *(HDA19),TraesCS6D02G168400
+deacetylase component *(HDA6),TraesCS6D02G168400
+deacetylase component *(HDA19),TraesCS6D02G171000
+deacetylase component *(HDA19),TraesCS7A02G365600
+deacetylase component *(HDA19),TraesCS7B02G261800
+deacetylase component *(HDA19),TraesCS7D02G356800
+associated component *(SAP18),TraesCS6A02G067100
+associated component *(SAP18),TraesCS6B02G090300
+component *(MBD2),TraesCS5A02G272500
+component *(MBD2),TraesCS5B02G272700
+component *(MBD2),TraesCS5D02G280500
+component *(MBD2),TraesCS7A02G417200
+component *(MBD2),TraesCS7B02G139000
+component *(MBD2),TraesCS7B02G139100
+component *(MBD2),TraesCS7B02G139200
+component *(MBD2),TraesCS7B02G317400
+component *(MBD2),TraesCS7D02G410300
+component *(SANT),TraesCS7A02G444600
+component *(SANT),TraesCS7B02G343600
+component *(SANT),TraesCS7D02G433300
+substrate adaptor,TraesCS6A02G045900
+substrate adaptor,TraesCS6A02G046100
+substrate adaptor,TraesCS6B02G062000
+substrate adaptor,TraesCS6D02G053100
+substrate adaptor *(CFK1),TraesCS5A02G355600
+substrate adaptor *(CFK1),TraesCS5B02G358100
+substrate adaptor *(CFK1),TraesCS5D02G363900
+substrate adaptor *(FBL17),TraesCS5A02G058400
+substrate adaptor *(FBL17),TraesCS5A02G378400
+substrate adaptor *(FBL17),TraesCS5B02G058300
+substrate adaptor *(FBL17),TraesCS5B02G382000
+substrate adaptor *(FBL17),TraesCS5D02G069500
+substrate adaptor *(FBL17),TraesCS5D02G388400
+component *(APC4),TraesCS6B02G377000
+component *(APC4),TraesCS6D02G327000
+component *(APC5),TraesCS5A02G020800
+component *(APC5),TraesCS5B02G017800
+component *(APC5),TraesCS5D02G025900
+component *(APC3),TraesCS7A02G398600
+component *(APC3),TraesCS7B02G299300
+component *(APC3),TraesCS7D02G392900
+component *(APC8),TraesCS6A02G251400
+component *(APC8),TraesCS6B02G273900
+component *(APC8),TraesCS6D02G233200
+component *(APC10),TraesCS5A02G358300
+component *(APC10),TraesCS6A02G073800
+component *(APC10),TraesCS6B02G407600
+component *(APC10),TraesCS6D02G354500
+component *(APC10),TraesCS7A02G155100
+component *(APC11),TraesCS5A02G476600
+component *(APC11),TraesCS5B02G489500
+component *(APC11),TraesCS5D02G489900
+substrate specificity component *(CDC20),TraesCS5A02G197800
+substrate specificity component *(CDC20),TraesCS5A02G272600
+substrate specificity component *(CDC20),TraesCS5B02G185900
+substrate specificity component *(CDC20),TraesCS5B02G272800
+substrate specificity component *(CDC20),TraesCS5D02G193100
+substrate specificity component *(CDC20),TraesCS5D02G280600
+substrate specificity component *(CDC20),TraesCS6A02G085400
+substrate specificity component *(CDC20),TraesCS6A02G268900
+substrate specificity component *(CDC20),TraesCS6B02G296200
+substrate specificity component *(CDC20),TraesCS6D02G246000
+component *(MUS81),TraesCS6A02G144500
+component *(MUS81),TraesCS7B02G011000
+component *(MUS81),TraesCS7D02G490700
+component CBP80,TraesCS6B02G066700
+component CBP20,TraesCS6A02G232100
+component CBP20,TraesCS6B02G249500
+component CBP20,TraesCS6D02G203100
+component *(MTA),TraesCS6A02G254900
+component *(MTA),TraesCS6B02G270600
+component *(MTA),TraesCS6D02G236200
+regulatory subcomplex,TraesCS7A02G234600
+regulatory subcomplex,TraesCS7B02G132800
+regulatory subcomplex,TraesCS7D02G234600
+regulatory subcomplex,TraesCS7A02G338200
+regulatory subcomplex,TraesCS7B02G249400
+regulatory subcomplex,TraesCS7D02G345400
+regulatory subcomplex,TraesCS7A02G298900
+regulatory subcomplex,TraesCS7B02G187100
+regulatory subcomplex,TraesCS7D02G294600
+substrate adaptor *(SKIP18),TraesCS6A02G316400
+substrate adaptor *(SKIP18),TraesCS6B02G347000
+substrate adaptor *(SKIP18),TraesCS6D02G296000
+substrate adaptor *(SKIP18),TraesCS7A02G178000
+substrate adaptor *(SKIP18),TraesCS7B02G083700
+substrate adaptor *(SKIP18),TraesCS7D02G179800
+component *(BOP1),TraesCS5A02G360900
+component *(BOP1),TraesCS5B02G363500
+component *(BOP1),TraesCS5D02G370000
+component *(ARPF2),TraesCS5A02G215000
+component *(ARPF2),TraesCS5A02G418000
+component *(ARPF2),TraesCS5B02G208800
+component *(ARPF2),TraesCS5B02G420100
+component *(ARPF2),TraesCS5D02G217000
+component *(ARPF2),TraesCS5D02G426000
+component *(ARRS1),TraesCS6A02G089000
+component *(ARRS1),TraesCS6B02G111400
+component *(NOC1/SWA2),TraesCS6A02G210800
+component *(NOC1/SWA2),TraesCS6B02G239800
+component *(NOC1/SWA2),TraesCS6D02G193900
+component *(NOC2),TraesCS5A02G019600
+component *(NOC2),TraesCS5B02G016900
+component *(NOC2),TraesCS5D02G025000
+component *(NOC3),TraesCS5A02G096400
+component *(NOC3),TraesCS5B02G102300
+component *(NOC3),TraesCS5D02G109100
+assembly factor *(Imp4),TraesCS7A02G301400
+assembly factor *(Imp4),TraesCS7B02G201700
+assembly factor *(Imp4),TraesCS7D02G296800
+assembly factor *(Mpp10),TraesCS5A02G138100
+assembly factor *(Mpp10),TraesCS5B02G136600
+assembly factor *(Mpp10),TraesCS5B02G137800
+assembly factor *(Mpp10),TraesCS5D02G154000
+assembly factor *(SWA1),TraesCS7A02G534500
+assembly factor *(SWA1),TraesCS7B02G451600
+assembly factor *(SWA1),TraesCS7D02G521800
+assembly factor *(UTP18),TraesCS5A02G439300
+assembly factor *(UTP18),TraesCS5B02G442300
+assembly factor *(UTP18),TraesCS5D02G446500
+assembly factor *(UTP21),TraesCS7A02G517200
+assembly factor *(UTP21),TraesCS7B02G433500
+assembly factor *(UTP21),TraesCS7D02G507400
+assembly factor *(TOZ),TraesCS7B02G423400
+assembly factor *(TOZ),TraesCS7D02G500800
+assembly factor *(UTP22),TraesCS5A02G122200
+assembly factor *(UTP22),TraesCS5B02G122300
+assembly factor *(UTP22),TraesCS5D02G130600
+assembly factor *(RRP7),TraesCS6A02G289700
+assembly factor *(RRP7),TraesCS6B02G319900
+assembly factor *(RRP7),TraesCS6D02G269200
+regulatory protein *(GCN20) of eIF2-alpha kinase activity,TraesCS6A02G409800
+regulatory protein *(GCN20) of eIF2-alpha kinase activity,TraesCS6B02G456000
+component *(Uev1),TraesCS5A02G054100
+component *(Uev1),TraesCS5A02G177900
+component *(Uev1),TraesCS5B02G062300
+component *(Uev1),TraesCS5B02G175500
+component *(Uev1),TraesCS5D02G065400
+component *(Uev1),TraesCS5D02G182300
+substrate adaptor *(UFO),TraesCS7A02G481600
+substrate adaptor *(UFO),TraesCS7B02G384000
+substrate adaptor *(UFO),TraesCS7D02G468700
+substrate adaptor *(RAE1),TraesCS5A02G091800
+substrate adaptor *(RAE1),TraesCS5A02G150800
+substrate adaptor *(RAE1),TraesCS5B02G097800
+substrate adaptor *(RAE1),TraesCS5B02G149400
+substrate adaptor *(RAE1),TraesCS5D02G103900
+substrate adaptor *(RAE1),TraesCS5D02G155900
+substrate adaptor *(InLYP1),TraesCS7A02G188000
+substrate adaptor *(VFB),TraesCS5A02G161400
+substrate adaptor *(VFB),TraesCS5B02G158800
+substrate adaptor *(VFB),TraesCS5D02G166300
+substrate adaptor *(SKIP4),TraesCS6A02G037900
+substrate adaptor *(SKIP4),TraesCS6B02G052900
+substrate adaptor *(SKIP4),TraesCS6D02G043400
+substrate adaptor,TraesCS7A02G408600
+substrate adaptor,TraesCS7B02G308300
+substrate adaptor,TraesCS7D02G401900
+substrate adaptor,TraesCS7A02G127700
+substrate adaptor,TraesCS7A02G127800
+substrate adaptor,TraesCS7B02G027600
+substrate adaptor,TraesCS7B02G027700
+substrate adaptor,TraesCS7D02G126300
+substrate adaptor,TraesCS7D02G126400
+substrate adaptor,TraesCS7A02G291800
+substrate adaptor,TraesCS7B02G197900
+substrate adaptor,TraesCS7D02G290000
+substrate adaptor,TraesCS5A02G502700
+substrate adaptor,TraesCS7A02G241200
+substrate adaptor,TraesCS7B02G136700
+substrate adaptor,TraesCS7D02G240200
+substrate adaptor,TraesCS6A02G070800
+substrate adaptor,TraesCS6A02G070900
+substrate adaptor,TraesCS6B02G094800
+substrate adaptor,TraesCS6B02G094900
+substrate adaptor,TraesCS6B02G095000
+substrate adaptor,TraesCS6D02G068600
+substrate adaptor,TraesCS6D02G068700
+substrate adaptor,TraesCS6D02G068800
+substrate adaptor,TraesCS6D02G095100
+substrate adaptor *(ARKP1),TraesCS6A02G306000
+substrate adaptor *(ARKP1),TraesCS6B02G334300
+substrate adaptor *(ARKP1),TraesCS6D02G285100
+substrate adaptor *(ARKP1),TraesCS7A02G004100
+substrate adaptor *(ARKP1),TraesCS7A02G004300
+substrate adaptor *(ARKP1),TraesCS7A02G004600
+substrate adaptor *(ARKP1),TraesCS7A02G006600
+substrate adaptor *(ARKP1),TraesCS7D02G004600
+substrate adaptor *(ARKP1),TraesCS7D02G005100
+substrate adaptor *(ARKP1),TraesCS7D02G005400
+substrate adaptor *(ARKP1),TraesCS7D02G007100
+substrate adaptor *(ARKP1),TraesCS7D02G007300
+substrate adaptor *(ARKP1),TraesCS7D02G007900
+substrate adaptor,TraesCS5A02G094200
+substrate adaptor,TraesCS5B02G100300
+substrate adaptor,TraesCS5D02G106500
+substrate adaptor,TraesCS6B02G227500
+substrate adaptor,TraesCS7A02G020100
+substrate adaptor,TraesCS7D02G016400
+substrate adaptor,TraesCS7B02G234000
+substrate adaptor *(SKIP30),TraesCS7B02G234000
+substrate adaptor *(SKIP30),TraesCS6A02G211500
+substrate adaptor *(SKIP30),TraesCS6B02G243200
+substrate adaptor *(SKIP30),TraesCS6D02G195800
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS5A02G312700
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS5A02G525700
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS5B02G313700
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS5D02G319500
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS6A02G256100
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS6B02G269300
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS6D02G237300
+substrate adaptor *(-DILLO),TraesCS4D02G366000
+substrate adaptor *(-DILLO),TraesCS5A02G542900
+substrate adaptor,TraesCS5A02G525000
+substrate adaptor,TraesCS5B02G571500
+substrate adaptor,TraesCS5D02G562500
+substrate adaptor,TraesCS6A02G153300
+substrate adaptor,TraesCS6B02G181000
+substrate adaptor,TraesCS6D02G142600
+substrate adaptor,TraesCS7B02G001200
+substrate adaptor,TraesCS5A02G137000
+substrate adaptor,TraesCS5B02G135700
+substrate adaptor,TraesCS5D02G154900
+substrate adaptor *(NPH3),TraesCS6A02G085100
+substrate adaptor *(NPH3),TraesCS6B02G117400
+substrate adaptor *(LRB),TraesCS5A02G359000
+substrate adaptor *(LRB),TraesCS5A02G359300
+substrate adaptor *(LRB),TraesCS5A02G359400
+substrate adaptor *(LRB),TraesCS5A02G359500
+substrate adaptor *(LRB),TraesCS5A02G360400
+substrate adaptor *(LRB),TraesCS5B02G361200
+substrate adaptor *(LRB),TraesCS5B02G361300
+substrate adaptor *(LRB),TraesCS5B02G361600
+substrate adaptor *(LRB),TraesCS5B02G361700
+substrate adaptor *(LRB),TraesCS5B02G361800
+substrate adaptor *(LRB),TraesCS5B02G362900
+substrate adaptor *(LRB),TraesCS5B02G510600
+substrate adaptor *(LRB),TraesCS5B02G510800
+substrate adaptor *(LRB),TraesCS5D02G368200
+substrate adaptor *(LRB),TraesCS5D02G368300
+substrate adaptor *(LRB),TraesCS5D02G368400
+substrate adaptor *(LRB),TraesCS5D02G368700
+substrate adaptor *(LRB),TraesCS5D02G510300
+substrate adaptor *(LRB),TraesCS5D02G510700
+substrate adaptor *(LRB),TraesCS5D02G510800
+substrate adaptor *(LRB),TraesCS5D02G510900
+substrate adaptor *(LRB),TraesCS7A02G343900
+substrate adaptor *(LRB),TraesCS7A02G344000
+substrate adaptor *(LRB),TraesCS7B02G239100
+substrate adaptor *(LRB),TraesCS7B02G239200
+substrate adaptor *(LRB),TraesCS7D02G335600
+substrate adaptor *(LRB),TraesCS7D02G335700
+substrate adaptor *(BPM),TraesCS5A02G429400
+substrate adaptor *(BPM),TraesCS5B02G431400
+substrate adaptor *(BPM),TraesCS5D02G437400
+substrate adaptor *(AHT),TraesCS5D02G264200
+substrate adaptor *(AHT),TraesCS7A02G236400
+substrate adaptor *(AHT),TraesCS7A02G326100
+substrate adaptor *(AHT),TraesCS7B02G134500
+substrate adaptor *(AHT),TraesCS7B02G226700
+substrate adaptor *(AHT),TraesCS7D02G236600
+substrate adaptor *(AHT),TraesCS7D02G322800
+substrate adaptor *(NPY),TraesCS5A02G070700
+substrate adaptor *(NPY),TraesCS5A02G223800
+substrate adaptor *(NPY),TraesCS5B02G076500
+substrate adaptor *(NPY),TraesCS5B02G222700
+substrate adaptor *(NPY),TraesCS5D02G082800
+substrate adaptor *(NPY),TraesCS5D02G231300
+substrate adaptor *(NPY),TraesCS7A02G149100
+substrate adaptor *(NPY),TraesCS7B02G052800
+substrate adaptor *(NPY),TraesCS7D02G150700
+substrate adaptor *(NRL),TraesCS5A02G042600
+substrate adaptor *(NRL),TraesCS5A02G375500
+substrate adaptor *(NRL),TraesCS5B02G046200
+substrate adaptor *(NRL),TraesCS5B02G377600
+substrate adaptor *(NRL),TraesCS5D02G051100
+substrate adaptor *(NRL),TraesCS5D02G385100
+substrate adaptor *(NRL),TraesCS7A02G309700
+substrate adaptor *(NRL),TraesCS7B02G209700
+substrate adaptor *(NRL),TraesCS7D02G306400
+substrate adaptor,TraesCS7A02G465100
+substrate adaptor,TraesCS7B02G365800
+substrate adaptor,TraesCS7D02G452800
+substrate adaptor,TraesCS5A02G360300
+substrate adaptor,TraesCS5B02G362800
+substrate adaptor,TraesCS5D02G369700
+substrate adaptor,TraesCS7A02G061100
+substrate adaptor,TraesCS7D02G055900
+substrate adaptor,TraesCS5A02G060900
+substrate adaptor,TraesCS5A02G404600
+substrate adaptor,TraesCS5B02G071200
+substrate adaptor,TraesCS5B02G409500
+substrate adaptor,TraesCS5B02G523400
+substrate adaptor,TraesCS5D02G072400
+substrate adaptor,TraesCS5D02G414700
+substrate adaptor,TraesCS7A02G185900
+substrate adaptor,TraesCS7B02G090400
+substrate adaptor,TraesCS7D02G186800
+substrate adaptor,TraesCS7D02G187700
+substrate adaptor,TraesCS7A02G224500
+substrate adaptor,TraesCS7A02G311400
+substrate adaptor,TraesCS7A02G472400
+substrate adaptor,TraesCS7B02G191100
+substrate adaptor,TraesCS7B02G211100
+substrate adaptor,TraesCS7D02G226000
+substrate adaptor,TraesCS7D02G307900
+substrate adaptor,TraesCS7D02G459500
+substrate adaptor,TraesCS6A02G231500
+substrate adaptor,TraesCS6B02G249800
+substrate adaptor,TraesCS6D02G203600
+substrate adaptor,TraesCS7B02G068700
+substrate adaptor,TraesCS7D02G165100
+substrate adaptor,TraesCS5A02G146300
+substrate adaptor,TraesCS5B02G145100
+substrate adaptor,TraesCS5D02G146000
+substrate adaptor *(ABD1),TraesCS7A02G543000
+substrate adaptor *(ABD1),TraesCS7A02G543100
+substrate adaptor *(ABD1),TraesCS7B02G465100
+substrate adaptor *(ABD1),TraesCS7D02G528700
+substrate adaptor *(ABD1),TraesCS7D02G528800
+substrate adaptor *(DWA2),TraesCS7A02G276100
+substrate adaptor *(DWA2),TraesCS7B02G173900
+substrate adaptor *(DWA2),TraesCS7D02G276000
+substrate adaptor,TraesCS6A02G284400
+substrate adaptor,TraesCS6A02G284600
+substrate adaptor,TraesCS6B02G313100
+substrate adaptor,TraesCS6B02G313300
+substrate adaptor,TraesCS6D02G264800
+substrate adaptor,TraesCS6D02G265000
+substrate adaptor,TraesCS7A02G132700
+substrate adaptor,TraesCS7A02G219400
+substrate adaptor,TraesCS7A02G240100
+substrate adaptor,TraesCS7A02G295100
+substrate adaptor,TraesCS7B02G033300
+substrate adaptor,TraesCS7B02G127900
+substrate adaptor,TraesCS7B02G135700
+substrate adaptor,TraesCS7B02G178000
+substrate adaptor,TraesCS7D02G132200
+substrate adaptor,TraesCS7D02G222700
+substrate adaptor,TraesCS7D02G238100
+substrate adaptor,TraesCS7D02G290100
+substrate adaptor,TraesCS6A02G205100
+substrate adaptor,TraesCS6B02G225500
+substrate adaptor,TraesCS6D02G190200
+substrate adaptor,TraesCS5A02G033600
+substrate adaptor,TraesCS5B02G033700
+substrate adaptor,TraesCS5D02G041900
+substrate adaptor *(BchD/GFS12),TraesCS7A02G346600
+substrate adaptor *(BchD/GFS12),TraesCS7B02G236400
+substrate adaptor *(BchD/GFS12),TraesCS7D02G332300
+substrate adaptor,TraesCS5B02G301100
+substrate adaptor,TraesCS5D02G307900
+substrate adaptor,TraesCS5A02G014600
+substrate adaptor,TraesCS5B02G012900
+substrate adaptor,TraesCS5D02G020400
+substrate adaptor *(RBV),TraesCS6A02G250200
+substrate adaptor *(RBV),TraesCS6B02G275200
+substrate adaptor *(RBV),TraesCS6D02G232000
+substrate adaptor *(HTD1/DWD1),TraesCS5A02G139800
+substrate adaptor *(HTD1/DWD1),TraesCS5B02G137200
+substrate adaptor,TraesCS5A02G122900
+substrate adaptor,TraesCS5B02G122700
+substrate adaptor,TraesCS5D02G131000
+COP1-SPA substrate adaptor module,TraesCS6A02G326100
+COP1-SPA substrate adaptor module,TraesCS6B02G356400
+COP1-SPA substrate adaptor module,TraesCS6D02G305800
+COP10-DET1 substrate adaptor module,TraesCS5A02G493700
+component *(PAC2),TraesCS5A02G403100
+component *(PAC2),TraesCS5B02G407900
+component *(PAC2),TraesCS5D02G413100
+component *(PAC3),TraesCS7A02G375200
+component *(PAC3),TraesCS7B02G252200
+component *(PAC3),TraesCS7D02G348200
+component *(PAC4),TraesCS4D02G365200
+component *(PAC4),TraesCS5A02G324400
+component *(PAC4),TraesCS5B02G325200
+component *(PAC4),TraesCS5D02G331300
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5B02G378900
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5B02G522500
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5B02G523600
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5B02G523700
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5B02G523800
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5B02G523900
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5B02G524100
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5B02G524200
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5B02G524400
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5D02G522600
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5D02G522700
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5D02G522900
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5D02G523000
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5D02G523100
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5D02G523200
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5D02G523300
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5D02G523400
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS5D02G523500
+component *(PHB3/4),TraesCS6A02G198500
+component *(PHB3/4),TraesCS6B02G228900
+component *(PHB3/4),TraesCS6B02G281500
+component *(PHB3/4),TraesCS6D02G185000
+component *(PHB3/4),TraesCS6D02G225000
+component alpha *(PsbE),TraesCS1A02G098300
+component alpha *(PsbE),TraesCS1A02G148500
+component alpha *(PsbE),TraesCS1A02G165100
+component alpha *(PsbE),TraesCS1D02G182100
+component alpha *(PsbE),TraesCS1D02G295400
+component alpha *(PsbE),TraesCS2A02G232500
+component alpha *(PsbE),TraesCS2A02G240900
+component alpha *(PsbE),TraesCS2B02G190600
+component alpha *(PsbE),TraesCS2B02G283900
+component alpha *(PsbE),TraesCS2D02G230300
+component alpha *(PsbE),TraesCS2D02G270700
+component alpha *(PsbE),TraesCS2D02G513000
+component alpha *(PsbE),TraesCS2D02G553800
+component alpha *(PsbE),TraesCS3B02G067100
+component alpha *(PsbE),TraesCS3B02G186700
+component alpha *(PsbE),TraesCS3D02G052800
+component alpha *(PsbE),TraesCS3D02G226600
+component alpha *(PsbE),TraesCS3D02G289800
+component alpha *(PsbE),TraesCS3D02G410600
+component alpha *(PsbE),TraesCS4A02G148100
+component alpha *(PsbE),TraesCS4A02G161600
+component alpha *(PsbE),TraesCS4B02G146600
+component alpha *(PsbE),TraesCS4D02G138900
+component alpha *(PsbE),TraesCS4D02G139800
+component beta *(PsbF),TraesCS1A02G148600
+component beta *(PsbF),TraesCS1D02G170300
+component beta *(PsbF),TraesCS1D02G170500
+component beta *(PsbF),TraesCS1D02G182000
+component beta *(PsbF),TraesCS1D02G295300
+component beta *(PsbF),TraesCS2A02G240800
+component beta *(PsbF),TraesCS2B02G262300
+component beta *(PsbF),TraesCS2D02G256700
+component beta *(PsbF),TraesCS2D02G270600
+component beta *(PsbF),TraesCS3B02G186600
+pH-sensor protein *(PsbS),TraesCS3A02G381000
+pH-sensor protein *(PsbS),TraesCS3B02G413700
+pH-sensor protein *(PsbS),TraesCS3D02G374200
+xanthophyll cycle,TraesCS2A02G280500
+xanthophyll cycle,TraesCS2B02G297800
+xanthophyll cycle,TraesCS2D02G279300
+xanthophyll cycle,TraesCS2A02G317000
+xanthophyll cycle,TraesCS2B02G335400
+xanthophyll cycle,TraesCS2D02G314900
+regulatory protein *(FLAP1),TraesCS4A02G277800
+regulatory protein *(FLAP1),TraesCS4B02G035300
+regulatory protein *(FLAP1),TraesCS4D02G033300
+regulatory protein *(YCF10),TraesCS3B02G287400
+regulatory protein *(NPQ6),TraesCS2A02G347300
+regulatory protein *(NPQ6),TraesCS2B02G365700
+regulatory protein *(NPQ6),TraesCS2D02G345900
+regulatory protein *(LCNP),TraesCS2A02G473600
+regulatory protein *(LCNP),TraesCS2B02G496600
+regulatory protein *(LCNP),TraesCS2D02G473300
+regulatory protein *(SOQ1),TraesCS4A02G123300
+regulatory protein *(SOQ1),TraesCS4B02G181000
+regulatory protein *(ROQH1),TraesCS4A02G189000
+regulatory protein *(ROQH1),TraesCS4D02G124000
+regulatory protein *(ROQH1),TraesCS4D02G166200
+subunit alpha,TraesCS2D02G049500
+subunit alpha,TraesCS4A02G315500
+subunit beta,TraesCS2A02G311700
+subunit beta,TraesCS4A02G452700
+5a),TraesCS3A02G302800
+5a),TraesCS3B02G333500
+5a),TraesCS3D02G299000
+2),TraesCS1A02G197300
+2),TraesCS1B02G211900
+2),TraesCS1D02G200800
+6),TraesCS4A02G038200
+6),TraesCS4B02G267500
+6),TraesCS4D02G267100
+component *(Mic60),TraesCS2A02G526700
+component *(Mic60),TraesCS2B02G557000
+component *(Mic60),TraesCS2D02G529400
+component *(Mic10),TraesCS4A02G347700
+component *(DGS1),TraesCS1A02G192400
+component *(DGS1),TraesCS1B02G207300
+component *(DGS1),TraesCS1D02G195800
+P4-type ATPase component *(ALA),TraesCS1A02G002500
+P4-type ATPase component *(ALA),TraesCS1A02G132600
+P4-type ATPase component *(ALA),TraesCS1B02G001800
+P4-type ATPase component *(ALA),TraesCS1B02G154200
+P4-type ATPase component *(ALA),TraesCS1D02G004700
+P4-type ATPase component *(ALA),TraesCS1D02G135500
+P4-type ATPase component *(ALA),TraesCS2A02G203300
+P4-type ATPase component *(ALA),TraesCS2A02G276800
+P4-type ATPase component *(ALA),TraesCS2B02G230600
+P4-type ATPase component *(ALA),TraesCS2B02G294800
+P4-type ATPase component *(ALA),TraesCS2D02G212400
+P4-type ATPase component *(ALA),TraesCS2D02G276300
+P4-type ATPase component *(ALA),TraesCS3A02G189700
+P4-type ATPase component *(ALA),TraesCS3B02G218800
+P4-type ATPase component *(ALA),TraesCS3D02G193200
+P4-type ATPase component *(ALA),TraesCS4A02G130300
+P4-type ATPase component *(ALA),TraesCS4A02G134800
+P4-type ATPase component *(ALA),TraesCS4B02G170400
+P4-type ATPase component *(ALA),TraesCS4B02G174200
+P4-type ATPase component *(ALA),TraesCS4B02G174300
+P4-type ATPase component *(ALA),TraesCS4D02G172400
+P4-type ATPase component *(ALA),TraesCS4D02G176200
+P4-type ATPase component *(ALA),TraesCS4D02G176300
+regulatory component *(ALIS),TraesCS1A02G350000
+regulatory component *(ALIS),TraesCS1B02G364300
+regulatory component *(ALIS),TraesCS1D02G352700
+regulatory component *(ALIS),TraesCS4B02G350400
+regulatory component *(ALIS),TraesCS4D02G345100
+VRN/FIS/EMF core subcomplexes,TraesCS4A02G388400
+VRN/FIS/EMF core subcomplexes,TraesCS2A02G000100
+VRN/FIS/EMF core subcomplexes,TraesCS2A02G002500
+VRN/FIS/EMF core subcomplexes,TraesCS2B02G020400
+VRN/FIS/EMF core subcomplexes,TraesCS2B02G023900
+VRN/FIS/EMF core subcomplexes,TraesCS2D02G000600
+VRN/FIS/EMF core subcomplexes,TraesCS4A02G121300
+VRN/FIS/EMF core subcomplexes,TraesCS4B02G181400
+VRN/FIS/EMF core subcomplexes,TraesCS4D02G184600
+associated protein factors,TraesCS3A02G211500
+associated protein factors,TraesCS3B02G241900
+associated protein factors,TraesCS3D02G214200
+associated protein factors,TraesCS1A02G108900
+associated protein factors,TraesCS1B02G108200
+associated protein factors,TraesCS1D02G090400
+associated protein factors,TraesCS3A02G417600
+associated protein factors,TraesCS3B02G452800
+associated protein factors,TraesCS3D02G413200
+associated protein factors,TraesCS1A02G443000
+associated protein factors,TraesCS1B02G477100
+associated protein factors,TraesCS1D02G451000
+associated protein factors,TraesCS2A02G442800
+associated protein factors,TraesCS2B02G463900
+associated protein factors,TraesCS2D02G441900
+associated protein factors,TraesCS3A02G203300
+associated protein factors,TraesCS3B02G229300
+associated protein factors,TraesCS3D02G206700
+associated protein factors,TraesCS3A02G194300
+associated protein factors,TraesCS3B02G230600
+associated protein factors,TraesCS3D02G205500
+associated protein factors,TraesCS1A02G060300
+associated protein factors,TraesCS2A02G488700
+associated protein factors,TraesCS2B02G516500
+associated protein factors,TraesCS2D02G489000
+deacetylase component *(HDA9),TraesCS2A02G293200
+deacetylase component *(HDA9),TraesCS2B02G309700
+deacetylase component *(HDA9),TraesCS2D02G291000
+component *(PWR),TraesCS1A02G068300
+component *(PWR),TraesCS1B02G086600
+component *(PWR),TraesCS1D02G069700
+component *(HOS15),TraesCS2A02G227200
+component *(HOS15),TraesCS2B02G255700
+component *(HOS15),TraesCS2D02G235100
+key scaffold component *(SNL),TraesCS1A02G002700
+key scaffold component *(SNL),TraesCS1B02G002000
+key scaffold component *(SNL),TraesCS1D02G004900
+key scaffold component *(SNL),TraesCS3B02G005900
+key scaffold component *(SNL),TraesCS3D02G007600
+associated component *(AFR),TraesCS2A02G000700
+associated component *(AFR),TraesCS2B02G023400
+associated component *(AFR),TraesCS2D02G000100
+associated component *(HDC1),TraesCS3A02G127400
+associated component *(HDC1),TraesCS3B02G146600
+associated component *(HDC1),TraesCS3D02G128600
+component *(MBD1/4),TraesCS1A02G253000
+component *(MBD1/4),TraesCS1A02G253100
+component *(MBD1/4),TraesCS1B02G265000
+component *(MBD1/4),TraesCS1B02G265200
+component *(MBD1/4),TraesCS1D02G252500
+component *(MBD1/4),TraesCS1D02G252700
+component *(SANT),TraesCS2A02G200200
+component *(SANT),TraesCS2D02G208000
+component *(SANT),TraesCS4A02G139000
+component *(SANT),TraesCS4A02G139100
+component *(SANT),TraesCS4B02G154500
+component *(SANT),TraesCS4B02G155200
+component *(SANT),TraesCS4D02G165400
+component *(SANT),TraesCS4D02G167100
+component *(APC1),TraesCS1A02G225100
+component *(APC1),TraesCS1B02G238300
+component *(APC1),TraesCS1D02G226500
+component *(APC6),TraesCS4A02G075000
+component *(APC6),TraesCS4B02G230900
+component *(APC6),TraesCS4D02G232400
+component *(APC7),TraesCS1A02G090300
+component *(APC7),TraesCS1B02G118300
+component *(APC7),TraesCS1D02G098700
+scaffold component *(APC2),TraesCS2A02G321000
+scaffold component *(APC2),TraesCS2B02G361700
+scaffold component *(APC2),TraesCS2D02G341700
+component *(APC10),TraesCS1A02G419400
+component *(APC10),TraesCS1B02G449500
+component *(APC10),TraesCS1D02G323600
+component *(APC10),TraesCS1D02G427200
+component *(APC10),TraesCS3B02G195200
+component *(APC11),TraesCS4A02G118100
+component *(APC11),TraesCS4D02G187600
+substrate specificity component *(FZR/CCS52),TraesCS3A02G527600
+substrate specificity component *(FZR/CCS52),TraesCS3B02G595600
+substrate specificity component *(FZR/CCS52),TraesCS3D02G533000
+substrate specificity component *(FZR/CCS52),TraesCS4B02G346200
+substrate specificity component *(FZR/CCS52),TraesCS4D02G341200
+substrate specificity component *(CDC20),TraesCS2A02G440000
+substrate specificity component *(CDC20),TraesCS2B02G461400
+substrate specificity component *(CDC20),TraesCS2D02G438800
+component *(MUS81),TraesCS1B02G105000
+component *(MUS81),TraesCS1B02G122400
+component *(MUS81),TraesCS1D02G082300
+component *(MUS81),TraesCS1D02G354000
+component *(MUS81),TraesCS3A02G188900
+component *(MUS81),TraesCS3A02G486900
+component *(MUS81),TraesCS3A02G487200
+component *(MUS81),TraesCS3B02G218300
+component *(MUS81),TraesCS3B02G489200
+component *(MUS81),TraesCS3B02G534900
+component *(MUS81),TraesCS3B02G535000
+component *(MUS81),TraesCS3D02G192600
+component *(MUS81),TraesCS3D02G482500
+component *(EME1),TraesCS2A02G514600
+component *(EME1),TraesCS2A02G514800
+component *(EME1),TraesCS2B02G542900
+component *(EME1),TraesCS2B02G543100
+component *(EME1),TraesCS2D02G516200
+component *(EME1),TraesCS2D02G516300
+component CBP80,TraesCS4A02G138800
+component CBP80,TraesCS4B02G158000
+component CBP80,TraesCS4D02G167200
+component *(MTB),TraesCS4A02G413300
+component *(MTB),TraesCS4B02G314000
+component *(MTB),TraesCS4D02G311200
+regulatory subcomplex,TraesCS1A02G164400
+regulatory subcomplex,TraesCS1B02G181200
+regulatory subcomplex,TraesCS1D02G150900
+regulatory subcomplex,TraesCS1D02G161400
+regulatory subcomplex,TraesCS3A02G143500
+regulatory subcomplex,TraesCS3A02G237300
+regulatory subcomplex,TraesCS3B02G161600
+regulatory subcomplex,TraesCS3B02G265900
+regulatory subcomplex,TraesCS3D02G144100
+regulatory subcomplex,TraesCS3D02G237700
+substrate adaptor *(SKIP18),TraesCS2A02G316800
+substrate adaptor *(SKIP18),TraesCS2B02G334900
+substrate adaptor *(SKIP18),TraesCS2D02G314700
+substrate adaptor *(SKIP18),TraesCS3A02G490000
+substrate adaptor *(SKIP18),TraesCS3B02G550600
+substrate adaptor *(HWS),TraesCS3A02G239100
+substrate adaptor *(HWS),TraesCS3B02G267600
+substrate adaptor *(HWS),TraesCS3D02G239300
+component *(CRS2),TraesCS3A02G036100
+component *(CRS2),TraesCS3B02G047900
+component *(CRS2),TraesCS3D02G043900
+component *(CAF),TraesCS3A02G194000
+component *(CAF),TraesCS3A02G196400
+component *(CAF),TraesCS3B02G221600
+component *(CAF),TraesCS3B02G222400
+component *(CAF),TraesCS3D02G195800
+component *(CAF),TraesCS3D02G200400
+component *(PES),TraesCS4A02G276400
+component *(PES),TraesCS4B02G037300
+component *(PES),TraesCS4D02G034600
+component *(WDR12),TraesCS2A02G177700
+component *(WDR12),TraesCS2B02G204800
+component *(WDR12),TraesCS2D02G185900
+component *(ARRS1),TraesCS1A02G060700
+component *(ARRS1),TraesCS1B02G079000
+component *(ARRS1),TraesCS1D02G061600
+component *(NOC2),TraesCS1A02G163900
+component *(NOC2),TraesCS1B02G180700
+component *(NOC2),TraesCS1D02G160800
+component *(NOC3),TraesCS2A02G455100
+component *(NOC3),TraesCS2B02G477200
+assembly factor *(Imp3),TraesCS2A02G495500
+assembly factor *(Imp3),TraesCS2B02G523800
+assembly factor *(Imp3),TraesCS2D02G495800
+assembly factor *(UTP4/PCN),TraesCS4A02G249300
+assembly factor *(UTP4/PCN),TraesCS4B02G065400
+assembly factor *(UTP4/PCN),TraesCS4D02G064400
+assembly factor *(UTP10),TraesCS2A02G416500
+assembly factor *(UTP10),TraesCS2B02G435400
+assembly factor *(UTP10),TraesCS2D02G413500
+assembly factor *(UTP12),TraesCS4A02G370000
+assembly factor *(UTP12),TraesCS4B02G317800
+assembly factor *(TOZ),TraesCS2A02G447700
+assembly factor *(TOZ),TraesCS2B02G468100
+assembly factor *(TOZ),TraesCS2D02G446600
+assembly factor *(PWP2/UTP1),TraesCS1A02G340000
+assembly factor *(PWP2/UTP1),TraesCS1B02G352300
+assembly factor *(PWP2/UTP1),TraesCS1D02G342000
+assembly factor *(UTP6),TraesCS2A02G259600
+assembly factor *(UTP6),TraesCS2B02G282300
+assembly factor *(UTP6),TraesCS2D02G263800
+component *(eIF2-alpha),TraesCS2B02G105000
+component *(eIF2-alpha),TraesCS2D02G087300
+component *(eIF2-alpha),TraesCS4A02G113300
+component *(eIF2-alpha),TraesCS4B02G190900
+component *(eIF2-alpha),TraesCS4D02G192100
+regulatory kinase *(GCN2),TraesCS2A02G349200
+regulatory kinase *(GCN2),TraesCS2B02G367600
+regulatory kinase *(GCN2),TraesCS2D02G347600
+kinase co-activator *(ILITHYIA/GCN1),TraesCS4A02G262300
+kinase co-activator *(ILITHYIA/GCN1),TraesCS4B02G052500
+kinase co-activator *(ILITHYIA/GCN1),TraesCS4D02G052700
+component *(CRT3),TraesCS3A02G399000
+component *(CRT3),TraesCS3B02G432000
+component *(CRT3),TraesCS3D02G393200
+component *(POD1),TraesCS4A02G265400
+component *(POD1),TraesCS4B02G049400
+component *(POD1),TraesCS4D02G049700
+regulatory component *(SUN3/4/5),TraesCS3A02G214200
+regulatory component *(SUN3/4/5),TraesCS3A02G389900
+regulatory component *(SUN3/4/5),TraesCS3B02G244900
+regulatory component *(SUN3/4/5),TraesCS3B02G418900
+regulatory component *(SUN3/4/5),TraesCS3D02G216900
+regulatory component *(SUN3/4/5),TraesCS3D02G379800
+component *(Ubc13),TraesCS1A02G285200
+component *(Ubc13),TraesCS1B02G294400
+component *(Ubc13),TraesCS1D02G284200
+component *(Ubc13),TraesCS3A02G357700
+component *(Ubc13),TraesCS3B02G390400
+component *(Ubc13),TraesCS3D02G351600
+component *(Uev1),TraesCS4A02G267500
+component *(Uev1),TraesCS4B02G046900
+component *(Uev1),TraesCS4D02G046700
+substrate adaptor *(EDL),TraesCS1A02G311200
+substrate adaptor *(EDL),TraesCS1B02G322600
+substrate adaptor *(EDL),TraesCS1D02G311100
+substrate adaptor *(EDL),TraesCS2A02G182000
+substrate adaptor *(EDL),TraesCS2B02G208500
+substrate adaptor *(EDL),TraesCS2D02G189700
+substrate adaptor *(EDL),TraesCS3A02G331200
+substrate adaptor *(EDL),TraesCS3B02G361400
+substrate adaptor *(EDL),TraesCS3D02G324600
+substrate adaptor *(EDL),TraesCS4A02G348100
+substrate adaptor *(SKP2),TraesCS1A02G264900
+substrate adaptor *(SKP2),TraesCS1B02G275600
+substrate adaptor *(SKP2),TraesCS1D02G265100
+substrate adaptor *(SKP2),TraesCS3A02G407700
+substrate adaptor *(SKP2),TraesCS3B02G440600
+substrate adaptor *(SKP2),TraesCS3D02G402900
+substrate adaptor *(FBP7),TraesCS2A02G303500
+substrate adaptor *(FBP7),TraesCS2B02G320100
+substrate adaptor *(FBP7),TraesCS2D02G302000
+substrate adaptor *(InLYP1),TraesCS4A02G275700
+substrate adaptor *(InLYP1),TraesCS4B02G038000
+substrate adaptor *(InLYP1),TraesCS4D02G035300
+substrate adaptor *(SUSA2/ARP8),TraesCS2A02G539700
+substrate adaptor *(SUSA2/ARP8),TraesCS2B02G570000
+substrate adaptor *(SUSA2/ARP8),TraesCS2D02G541300
+substrate adaptor *(VFB),TraesCS2A02G359900
+substrate adaptor *(VFB),TraesCS2D02G358900
+substrate adaptor *(FBS),TraesCS1A02G136000
+substrate adaptor *(FBS),TraesCS1B02G156200
+substrate adaptor *(FBS),TraesCS1D02G138600
+substrate adaptor *(FBS),TraesCS2A02G205100
+substrate adaptor *(FBS),TraesCS2B02G232500
+substrate adaptor *(FBS),TraesCS2D02G211000
+substrate adaptor *(AUF),TraesCS1A02G307800
+substrate adaptor *(AUF),TraesCS1A02G329300
+substrate adaptor *(AUF),TraesCS1B02G318500
+substrate adaptor *(AUF),TraesCS1B02G342700
+substrate adaptor *(AUF),TraesCS1D02G307200
+substrate adaptor *(AUF),TraesCS1D02G331400
+substrate adaptor *(AUF),TraesCS3A02G296700
+substrate adaptor *(AUF),TraesCS3A02G336900
+substrate adaptor *(AUF),TraesCS3B02G340400
+substrate adaptor *(AUF),TraesCS3B02G368000
+substrate adaptor *(AUF),TraesCS3D02G306000
+substrate adaptor *(AUF),TraesCS3D02G329900
+substrate adaptor *(AUF),TraesCS3D02G518800
+substrate adaptor *(AUF),TraesCS4A02G127600
+substrate adaptor *(AUF),TraesCS4B02G177100
+substrate adaptor *(AUF),TraesCS4D02G178800
+substrate adaptor,TraesCS1A02G056500
+substrate adaptor,TraesCS1B02G073600
+substrate adaptor,TraesCS1D02G057200
+substrate adaptor *(SKIP16),TraesCS1A02G115000
+substrate adaptor *(SKIP16),TraesCS1B02G134900
+substrate adaptor *(SKIP16),TraesCS1D02G116400
+substrate adaptor *(SKIP16),TraesCS4A02G231800
+substrate adaptor *(SKIP16),TraesCS4B02G084200
+substrate adaptor *(SKIP16),TraesCS4D02G082100
+substrate adaptor *(SKIP5),TraesCS2A02G129100
+substrate adaptor *(SKIP5),TraesCS2B02G151200
+substrate adaptor,TraesCS2D02G541700
+substrate adaptor,TraesCS1A02G346700
+substrate adaptor,TraesCS1B02G360600
+substrate adaptor,TraesCS1D02G349500
+substrate adaptor,TraesCS2A02G336200
+substrate adaptor,TraesCS2B02G345700
+substrate adaptor,TraesCS2D02G326700
+substrate adaptor,TraesCS3A02G372500
+substrate adaptor,TraesCS3B02G404900
+substrate adaptor,TraesCS3D02G365400
+substrate adaptor,TraesCS4B02G331300
+substrate adaptor,TraesCS4D02G328200
+substrate adaptor,TraesCS4A02G060300
+substrate adaptor,TraesCS4B02G235800
+substrate adaptor,TraesCS4D02G237200
+substrate adaptor,TraesCS3A02G192000
+substrate adaptor,TraesCS3A02G333500
+substrate adaptor,TraesCS3B02G220900
+substrate adaptor,TraesCS3B02G364700
+substrate adaptor,TraesCS3D02G195100
+substrate adaptor,TraesCS3D02G327100
+substrate adaptor *(SKIP24),TraesCS3A02G338500
+substrate adaptor *(SKIP24),TraesCS3B02G370100
+substrate adaptor *(SKIP24),TraesCS3D02G332000
+substrate adaptor *(BAF1),TraesCS2A02G577100
+substrate adaptor *(BAF1),TraesCS2B02G610300
+substrate adaptor *(BAF1),TraesCS2D02G588100
+substrate adaptor *(BAF1),TraesCS4A02G184400
+substrate adaptor *(RIFP1),TraesCS2A02G320200
+substrate adaptor *(RIFP1),TraesCS2A02G438500
+substrate adaptor *(RIFP1),TraesCS2B02G363000
+substrate adaptor *(RIFP1),TraesCS2B02G458800
+substrate adaptor *(RIFP1),TraesCS2D02G343000
+substrate adaptor *(RIFP1),TraesCS2D02G435600
+substrate adaptor *(RIFP1),TraesCS2D02G435900
+substrate adaptor *(ARKP1),TraesCS2A02G462600
+substrate adaptor *(ARKP1),TraesCS2B02G484200
+substrate adaptor *(ARKP1),TraesCS2D02G463000
+substrate adaptor *(ARKP1),TraesCS4A02G016200
+substrate adaptor *(ARKP1),TraesCS4A02G486700
+substrate adaptor *(ARKP1),TraesCS4A02G487800
+substrate adaptor *(ARKP1),TraesCS4A02G488300
+substrate adaptor *(ARKP1),TraesCS4A02G489300
+substrate adaptor *(ARKP1),TraesCS4A02G489600
+substrate adaptor *(ARKP1),TraesCS4A02G491100
+substrate adaptor *(ARKP1),TraesCS4A02G492300
+substrate adaptor *(ARKP1),TraesCS4A02G493200
+substrate adaptor *(ARKP1),TraesCS4A02G493800
+substrate adaptor *(ARKP1),TraesCS4D02G286700
+substrate adaptor *(SKIP6),TraesCS2A02G111200
+substrate adaptor *(SKIP6),TraesCS2B02G130200
+substrate adaptor *(SKIP6),TraesCS2D02G111900
+substrate adaptor *(FBX2),TraesCS2A02G463100
+substrate adaptor *(FBX2),TraesCS2B02G484800
+substrate adaptor *(FBX2),TraesCS2D02G463700
+substrate adaptor *(LCR),TraesCS3A02G435400
+substrate adaptor *(LCR),TraesCS3B02G470300
+substrate adaptor *(LCR),TraesCS3D02G428200
+substrate adaptor,TraesCS2A02G167400
+substrate adaptor,TraesCS2B02G193700
+substrate adaptor,TraesCS2D02G175100
+substrate adaptor,TraesCS4A02G472100
+substrate adaptor *(SKIP35),TraesCS4A02G229000
+substrate adaptor *(SKIP35),TraesCS4B02G087400
+substrate adaptor *(SKIP35),TraesCS4D02G084700
+substrate adaptor *(SKIP8),TraesCS3A02G287900
+substrate adaptor *(SKIP8),TraesCS3B02G322600
+substrate adaptor *(SKIP8),TraesCS3D02G287700
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS1A02G188700
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS1B02G196400
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS1D02G187700
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS2A02G400100
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS2B02G418200
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS2D02G397700
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS4B02G356300
+substrate adaptor *(SKIP13/SKIP10/SKIP9),TraesCS4D02G350000
+substrate adaptor *(FBL12),TraesCS4A02G230600
+substrate adaptor *(FBL12),TraesCS4B02G085300
+substrate adaptor *(FBL12),TraesCS4D02G083300
+substrate adaptor *(FBL4),TraesCS4A02G142500
+substrate adaptor *(FBL4),TraesCS4D02G148000
+substrate adaptor *(FBL15),TraesCS1A02G136200
+substrate adaptor *(FBL15),TraesCS1B02G154100
+substrate adaptor *(FBL15),TraesCS1D02G136800
+substrate adaptor *(SNIPER4),TraesCS1A02G173500
+substrate adaptor *(SNIPER4),TraesCS1B02G190900
+substrate adaptor *(SNIPER4),TraesCS1D02G165300
+substrate adaptor *(CFK1),TraesCS3A02G231200
+substrate adaptor *(-DILLO),TraesCS1A02G217900
+substrate adaptor *(-DILLO),TraesCS1B02G231300
+substrate adaptor *(-DILLO),TraesCS1D02G219600
+substrate adaptor *(-DILLO),TraesCS4B02G371400
+substrate adaptor,TraesCS3A02G199900
+substrate adaptor,TraesCS3B02G224900
+substrate adaptor,TraesCS3D02G204100
+substrate adaptor,TraesCS3B02G145100
+substrate adaptor,TraesCS3D02G127000
+substrate adaptor,TraesCS4A02G492200
+substrate adaptor,TraesCS4A02G494000
+substrate adaptor,TraesCS4B02G355800
+substrate adaptor,TraesCS4D02G349200
+substrate adaptor,TraesCS2A02G327700
+substrate adaptor,TraesCS2B02G354300
+substrate adaptor,TraesCS2D02G335200
+substrate adaptor,TraesCS4A02G218600
+substrate adaptor,TraesCS4B02G097400
+substrate adaptor,TraesCS4D02G093800
+substrate adaptor *(LRB),TraesCS2A02G418800
+substrate adaptor *(LRB),TraesCS3A02G118000
+substrate adaptor *(LRB),TraesCS3A02G118100
+substrate adaptor *(LRB),TraesCS3D02G119900
+substrate adaptor *(LRB),TraesCS4A02G362000
+substrate adaptor *(LRB),TraesCS4A02G362100
+substrate adaptor *(LRB),TraesCS4A02G362200
+substrate adaptor *(LRB),TraesCS4A02G362300
+substrate adaptor *(LRB),TraesCS4A02G362400
+substrate adaptor *(LRB),TraesCS4A02G362700
+substrate adaptor *(LRB),TraesCS4A02G362800
+substrate adaptor *(FBL),TraesCS3A02G520000
+substrate adaptor *(FBL),TraesCS3B02G587700
+substrate adaptor *(BT),TraesCS2A02G323000
+substrate adaptor *(BT),TraesCS2A02G323200
+substrate adaptor *(BT),TraesCS2B02G359400
+substrate adaptor *(BT),TraesCS2B02G359600
+substrate adaptor *(BT),TraesCS2D02G339700
+substrate adaptor *(BT),TraesCS2D02G339900
+substrate adaptor *(BT),TraesCS3A02G400400
+substrate adaptor *(BT),TraesCS3A02G413600
+substrate adaptor *(BT),TraesCS3A02G413700
+substrate adaptor *(BT),TraesCS3B02G433400
+substrate adaptor *(BT),TraesCS3B02G448000
+substrate adaptor *(BT),TraesCS3B02G448100
+substrate adaptor *(BT),TraesCS3D02G394800
+substrate adaptor *(BT),TraesCS3D02G408000
+substrate adaptor *(BT),TraesCS3D02G408100
+substrate adaptor *(BPH1),TraesCS2A02G553600
+substrate adaptor *(BPH1),TraesCS2B02G585400
+substrate adaptor *(BPH1),TraesCS2D02G555200
+substrate adaptor *(BPH1),TraesCS3A02G071400
+substrate adaptor *(BPH1),TraesCS3B02G085000
+substrate adaptor *(BPM),TraesCS2A02G135800
+substrate adaptor *(BPM),TraesCS2A02G237800
+substrate adaptor *(BPM),TraesCS2A02G255800
+substrate adaptor *(BPM),TraesCS2B02G159700
+substrate adaptor *(BPM),TraesCS2B02G262200
+substrate adaptor *(BPM),TraesCS2D02G138300
+substrate adaptor *(BPM),TraesCS2D02G246900
+substrate adaptor *(BPM),TraesCS2D02G266900
+substrate adaptor *(NPY),TraesCS4A02G048200
+substrate adaptor *(NPY),TraesCS4A02G236100
+substrate adaptor *(NPY),TraesCS4B02G078900
+substrate adaptor *(NPY),TraesCS4B02G256600
+substrate adaptor *(NPY),TraesCS4D02G256700
+substrate adaptor *(NCL/NCH),TraesCS4A02G049300
+substrate adaptor *(NCL/NCH),TraesCS4B02G255500
+substrate adaptor *(NCL/NCH),TraesCS4D02G255500
+substrate adaptor,TraesCS4A02G196800
+substrate adaptor,TraesCS4B02G118500
+substrate adaptor,TraesCS4D02G116200
+substrate adaptor *(NRL),TraesCS2A02G526900
+substrate adaptor *(NRL),TraesCS2B02G557300
+substrate adaptor *(NRL),TraesCS2D02G529600
+substrate adaptor,TraesCS3A02G480600
+substrate adaptor,TraesCS3B02G525700
+substrate adaptor,TraesCS3D02G475400
+substrate adaptor *(EAP3),TraesCS4A02G090000
+substrate adaptor *(EAP3),TraesCS4B02G214200
+substrate adaptor *(EAP3),TraesCS4D02G214900
+substrate adaptor,TraesCS4A02G428700
+substrate adaptor,TraesCS3A02G451000
+substrate adaptor,TraesCS3B02G488400
+substrate adaptor,TraesCS3D02G443900
+substrate adaptor,TraesCS2B02G413600
+substrate adaptor,TraesCS4A02G349300
+substrate adaptor *(ARIA),TraesCS1A02G249400
+substrate adaptor *(ARIA),TraesCS1B02G260100
+substrate adaptor *(ARIA),TraesCS1D02G248900
+substrate adaptor,TraesCS4A02G032800
+substrate adaptor,TraesCS4B02G272500
+substrate adaptor,TraesCS4D02G271600
+substrate adaptor,TraesCS1A02G380600
+substrate adaptor,TraesCS1B02G402800
+substrate adaptor,TraesCS2A02G356200
+substrate adaptor,TraesCS2B02G375500
+substrate adaptor,TraesCS2D02G355100
+substrate adaptor,TraesCS3A02G123900
+substrate adaptor,TraesCS3B02G143900
+substrate adaptor,TraesCS3D02G125500
+substrate adaptor,TraesCS2A02G190500
+substrate adaptor,TraesCS2B02G216500
+substrate adaptor,TraesCS2D02G197400
+substrate adaptor,TraesCS2A02G213700
+substrate adaptor,TraesCS2B02G238600
+substrate adaptor,TraesCS2D02G219600
+substrate adaptor *(OZS3),TraesCS1A02G146200
+substrate adaptor *(OZS3),TraesCS1B02G164300
+substrate adaptor *(OZS3),TraesCS1D02G144700
+substrate adaptor *(ABD1),TraesCS1A02G204200
+substrate adaptor *(ABD1),TraesCS1B02G217800
+substrate adaptor *(ABD1),TraesCS1D02G207500
+substrate adaptor *(ABD1),TraesCS4A02G106900
+substrate adaptor *(ABD1),TraesCS4B02G197400
+substrate adaptor *(ABD1),TraesCS4D02G197900
+substrate adaptor *(ASG2),TraesCS4A02G002000
+substrate adaptor *(ASG2),TraesCS4B02G303100
+substrate adaptor *(ASG2),TraesCS4D02G301600
+substrate adaptor *(DCAF1),TraesCS2A02G566600
+substrate adaptor *(DCAF1),TraesCS2B02G630100
+substrate adaptor *(DCAF1),TraesCS2D02G576800
+substrate adaptor,TraesCS2A02G161400
+substrate adaptor,TraesCS2B02G187400
+substrate adaptor,TraesCS2D02G168500
+substrate adaptor,TraesCS4A02G093000
+substrate adaptor,TraesCS4B02G211500
+substrate adaptor,TraesCS4D02G212100
+substrate adaptor,TraesCS1A02G091700
+substrate adaptor,TraesCS2A02G412800
+substrate adaptor,TraesCS2B02G431400
+substrate adaptor,TraesCS2D02G410100
+substrate adaptor,TraesCS3D02G252500
+substrate adaptor,TraesCS4A02G120400
+substrate adaptor,TraesCS4D02G185600
+substrate adaptor,TraesCS3A02G201200
+substrate adaptor,TraesCS3B02G224700
+substrate adaptor,TraesCS3D02G203900
+substrate adaptor,TraesCS2A02G061500
+substrate adaptor,TraesCS2B02G074700
+substrate adaptor,TraesCS2D02G060600
+substrate adaptor *(HTD1/DWD1),TraesCS4A02G187400
+substrate adaptor *(HTD1/DWD1),TraesCS4B02G131200
+substrate adaptor *(HTD1/DWD1),TraesCS4D02G126000
+substrate adaptor,TraesCS3A02G047800
+substrate adaptor,TraesCS3B02G034400
+substrate adaptor,TraesCS3D02G031900
+substrate adaptor,TraesCS4A02G276500
+substrate adaptor,TraesCS4B02G037200
+substrate adaptor,TraesCS4D02G034500
+substrate adaptor,TraesCS1A02G065300
+substrate adaptor,TraesCS1A02G086800
+substrate adaptor,TraesCS1A02G255000
+substrate adaptor,TraesCS1B02G083400
+substrate adaptor,TraesCS1B02G105200
+substrate adaptor,TraesCS1B02G263400
+substrate adaptor,TraesCS1D02G066000
+substrate adaptor,TraesCS1D02G088200
+substrate adaptor,TraesCS1D02G254400
+COP1-SPA substrate adaptor module,TraesCS1D02G417600
+COP1-SPA substrate adaptor module,TraesCS3A02G284700
+COP1-SPA substrate adaptor module,TraesCS3B02G318600
+COP1-SPA substrate adaptor module,TraesCS3D02G284500
+COP10-DET1 substrate adaptor module,TraesCS2A02G187000
+COP10-DET1 substrate adaptor module,TraesCS2B02G220200
+COP10-DET1 substrate adaptor module,TraesCS2D02G200900
+COP10-DET1 substrate adaptor module,TraesCS3A02G194600
+COP10-DET1 substrate adaptor module,TraesCS3B02G231100
+COP10-DET1 substrate adaptor module,TraesCS4A02G125100
+COP10-DET1 substrate adaptor module,TraesCS4D02G180900
+COP10-DET1 substrate adaptor module,TraesCS4B02G318500
+COP10-DET1 substrate adaptor module,TraesCS4D02G314900
+component *(PAC1),TraesCS3A02G143400
+component *(PAC1),TraesCS3B02G161700
+component *(PAC1),TraesCS3D02G144200
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS1A02G442500
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS1B02G476600
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS1D02G450300
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS3A02G205300
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS3A02G222300
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS3B02G237400
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS3B02G252900
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS3D02G210100
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS3D02G230100
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS4A02G348600
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS4A02G348700
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS4A02G348800
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS4A02G349000
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS4A02G349100
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS4A02G349200
+ATP-dependent metalloprotease *(FtsH4/11),TraesCS4A02G424500
+component *(Fts3/10),TraesCS1A02G283800
+component *(Fts3/10),TraesCS1B02G293000
+component *(Fts3/10),TraesCS1D02G282900
+component *(Fts3/10),TraesCS3A02G360800
+component *(Fts3/10),TraesCS3B02G393200
+component *(Fts3/10),TraesCS3D02G354500
+component *(PHB3/4),TraesCS2A02G337100
+component *(PHB3/4),TraesCS2B02G344800
+component *(PHB3/4),TraesCS2D02G325800

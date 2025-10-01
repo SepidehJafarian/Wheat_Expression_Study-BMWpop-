@@ -1,0 +1,111 @@
+component *(MSI1),TraesCS5B02G378700
+component *(MSI1),TraesCS5D02G385600
+component *(FIE),TraesCS7A02G089100
+component *(FIE),TraesCS7A02G089200
+component *(FIE),TraesCS7A02G308300
+component *(FIE),TraesCS7D02G084500
+component *(FIE),TraesCS7D02G305100
+component *(EMF2/VRN2/FIS2),TraesCS5A02G179600
+component *(EMF2/VRN2/FIS2),TraesCS5B02G177400
+catalytic component *(CLF/SWN/MEA),TraesCS7A02G128300
+catalytic component *(CLF/SWN/MEA),TraesCS7A02G128600
+catalytic component *(CLF/SWN/MEA),TraesCS7B02G028200
+catalytic component *(CLF/SWN/MEA),TraesCS7B02G028500
+catalytic component *(CLF/SWN/MEA),TraesCS7D02G127100
+catalytic component *(CLF/SWN/MEA),TraesCS7D02G127400
+PRC2-recruiting factor *(TRB),TraesCS5A02G041500
+PRC2-recruiting factor *(TRB),TraesCS5A02G375400
+PRC2-recruiting factor *(TRB),TraesCS5B02G043100
+PRC2-recruiting factor *(TRB),TraesCS5B02G377500
+PRC2-recruiting factor *(TRB),TraesCS5D02G048400
+PRC2-recruiting factor *(TRB),TraesCS5D02G385000
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS5A02G097100
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS5B02G102800
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS5D02G109600
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS6A02G123400
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS6B02G151600
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS6D02G113600
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS7A02G433000
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS7D02G424600
+chromatin-silencing modulator *(ALP2),TraesCS5A02G154000
+chromatin-silencing modulator *(ALP2),TraesCS5B02G152700
+chromatin-silencing modulator *(ALP2),TraesCS5D02G159200
+histone H3 methylation reader *(PWO),TraesCS6A02G268700
+histone H3 methylation reader *(PWO),TraesCS6B02G295800
+histone H3 methylation reader *(PWO),TraesCS6D02G246200
+regulatory component *(FIP37),TraesCS7A02G234600
+regulatory component *(FIP37),TraesCS7B02G132800
+regulatory component *(FIP37),TraesCS7D02G234600
+regulatory component *(VIR),TraesCS7A02G338200
+regulatory component *(VIR),TraesCS7B02G249400
+regulatory component *(VIR),TraesCS7D02G345400
+regulatory component *(HIZ1),TraesCS7A02G298900
+regulatory component *(HIZ1),TraesCS7B02G187100
+regulatory component *(HIZ1),TraesCS7D02G294600
+component *(COP1),TraesCS6A02G326100
+component *(COP1),TraesCS6B02G356400
+component *(COP1),TraesCS6D02G305800
+component *(DDA),TraesCS5A02G493700
+violaxanthin de-epoxidase *(VDE),TraesCS2A02G280500
+violaxanthin de-epoxidase *(VDE),TraesCS2B02G297800
+violaxanthin de-epoxidase *(VDE),TraesCS2D02G279300
+zeaxanthin epoxidase *(ZEP),TraesCS2A02G317000
+zeaxanthin epoxidase *(ZEP),TraesCS2B02G335400
+zeaxanthin epoxidase *(ZEP),TraesCS2D02G314900
+component *(FIE),TraesCS4A02G388400
+component *(EMF2/VRN2/FIS2),TraesCS2A02G000100
+component *(EMF2/VRN2/FIS2),TraesCS2A02G002500
+component *(EMF2/VRN2/FIS2),TraesCS2B02G020400
+component *(EMF2/VRN2/FIS2),TraesCS2B02G023900
+component *(EMF2/VRN2/FIS2),TraesCS2D02G000600
+catalytic component *(CLF/SWN/MEA),TraesCS4A02G121300
+catalytic component *(CLF/SWN/MEA),TraesCS4B02G181400
+catalytic component *(CLF/SWN/MEA),TraesCS4D02G184600
+PRC2-recruiting factor *(TRB),TraesCS3A02G211500
+PRC2-recruiting factor *(TRB),TraesCS3B02G241900
+PRC2-recruiting factor *(TRB),TraesCS3D02G214200
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS1A02G108900
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS1B02G108200
+PRC2-VRN-interacting factor *(VIN3/VEL),TraesCS1D02G090400
+chromatin-silencing modulator *(BLI),TraesCS3A02G417600
+chromatin-silencing modulator *(BLI),TraesCS3B02G452800
+chromatin-silencing modulator *(BLI),TraesCS3D02G413200
+histone H3 methylation reader *(PWO),TraesCS1A02G443000
+histone H3 methylation reader *(PWO),TraesCS1B02G477100
+histone H3 methylation reader *(PWO),TraesCS1D02G451000
+histone H3 methylation reader *(PWO),TraesCS2A02G442800
+histone H3 methylation reader *(PWO),TraesCS2B02G463900
+histone H3 methylation reader *(PWO),TraesCS2D02G441900
+histone H3 methylation reader *(PWO),TraesCS3A02G203300
+histone H3 methylation reader *(PWO),TraesCS3B02G229300
+histone H3 methylation reader *(PWO),TraesCS3D02G206700
+histone H3 demethylase *(ICU11/CP),TraesCS3A02G194300
+histone H3 demethylase *(ICU11/CP),TraesCS3B02G230600
+histone H3 demethylase *(ICU11/CP),TraesCS3D02G205500
+regulatory protein *(PACP),TraesCS1A02G060300
+regulatory protein *(PACP),TraesCS2A02G488700
+regulatory protein *(PACP),TraesCS2B02G516500
+regulatory protein *(PACP),TraesCS2D02G489000
+E3 ubiquitin ligase component *(HAKAI),TraesCS1A02G164400
+E3 ubiquitin ligase component *(HAKAI),TraesCS1B02G181200
+E3 ubiquitin ligase component *(HAKAI),TraesCS1D02G150900
+E3 ubiquitin ligase component *(HAKAI),TraesCS1D02G161400
+regulatory component *(HIZ2),TraesCS3A02G143500
+regulatory component *(HIZ2),TraesCS3A02G237300
+regulatory component *(HIZ2),TraesCS3B02G161600
+regulatory component *(HIZ2),TraesCS3B02G265900
+regulatory component *(HIZ2),TraesCS3D02G144100
+regulatory component *(HIZ2),TraesCS3D02G237700
+regulator component *(SPA),TraesCS1D02G417600
+regulator component *(SPA),TraesCS3A02G284700
+regulator component *(SPA),TraesCS3B02G318600
+regulator component *(SPA),TraesCS3D02G284500
+component *(COP10),TraesCS2A02G187000
+component *(COP10),TraesCS2B02G220200
+component *(COP10),TraesCS2D02G200900
+component *(DET1),TraesCS3A02G194600
+component *(DET1),TraesCS3B02G231100
+component *(DET1),TraesCS4A02G125100
+component *(DET1),TraesCS4D02G180900
+component *(DDA),TraesCS4B02G318500
+component *(DDA),TraesCS4D02G314900
