@@ -1,0 +1,1041 @@
+---
+title: "03-01-2_1-BMWpop-DEGs-analysis-no outlier_dropped two genotypes-only CID comparison-only drought condition"
+author: "sepideh.Jafarian"
+date: "2024-04-12"
+output: 
+  rmarkdown::html_document:
+    theme: cosmo
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    number_sections: TRUE
+editor_options: 
+  chunk_output_type: inline
+   root.dir: "C:/Users/SepidehJafarian/Desktop/BMW-transcriptom-analysis/03-1-2-1-DEGs-analysis-CID comparison-dropped-only    drought interaction-no outlier"
+---
+
+```{r eval=FALSE, echo=TRUE, warning=FALSE, setup, include=TRUE}
+knitr::opts_chunk$set(echo = FALSE)
+library(DESeq2)
+library(tximport)
+library(GenomicFeatures)
+library(rhdf5)
+library(geneplotter)
+library(limma)
+library(SummarizedExperiment)
+library(vsn)
+library(pheatmap)
+library(RColorBrewer)
+library(ggplot2)
+library(AnnotationDbi)
+library(ggbeeswarm)
+library(dplyr)
+library(EnhancedVolcano)
+set.seed(56)
+```
+
+
+
+# ```{r, include=TRUE}
+# 
+# require("knitr")
+# opts_knit$set(root.dir ="C:/Users/SepidehJafarian/Desktop/BMW-transcriptom-analysis/03-1-2-1-DEGs-analysis-CID comparison-dropped-only drought interaction-no outlier")
+# getwd()
+# ```
+
+
+Set the directory and read the required data
+
+```{r, include=TRUE, echo=TRUE }
+
+wd ="C:/Users/SepidehJafarian/Desktop/BMW-transcriptom-analysis/03-1-2-1-DEGs-analysis-CID comparison-dropped-only drought"
+setwd(wd)
+getwd()
+
+```
+
+
+
+
+##  Accessing the file with
+### the counts( resulting from Kallisto, tsv files) without merged lists
+### reading the required file(data) 
+
+```{r, include=TRUE, echo=TRUE}
+infile <-  file.path(wd,"bmw-samples-info-modified-dropped-drought.csv")
+View(infile)
+```
+
+
+
+```{r, include=TRUE, echo=TRUE}
+
+data = read.table(infile, header=TRUE, sep = ',', stringsAsFactors=FALSE)
+
+View(data)
+dim(data)
+
+```
+
+
+## Extracting the data
+### including only **filnemes** & **samle names**
+
+```{r, include=TRUE, echo=TRUE}
+quant_files <- data[,'FileName']
+names(quant_files) <- data[,'SampleName']
+
+head(quant_files)
+View(quant_files)
+
+```
+
+## To check all samples and their counts exist
+### The results should **TRUE** if all are there
+
+```{r, include=TRUE, echo=TRUE}
+all(file.exists(quant_files))
+```
+
+## Loading gff3 files which includes the genes information
+### We need this file because the transcripts needs to be converted to the genes later on.
+
+```{r, include=TRUE, echo=TRUE}
+gtf_file <- "IWGSC_v1.1_HC_20170706.gtf"
+file.exists(gtf_file)
+```
+
+
+## database creation
+### makeTxDbFromGFF from GenomicFeatures package. This function is specifically designed to create a **transcript database (TxDb) object from a GFF (General Feature Format)** file
+
+```{r, include=TRUE, echo=TRUE, eval=TRUE}
+library(GenomicFeatures)
+txdb <- makeTxDbFromGFF(gtf_file)
+
+```
+
+
+## Keytyps
+### Finding keytypes and column names of the transcript database (TxDb).We are going to filter the database by a key or set of keys in order to extract the information we want. Valid names for the key can be retrieved with the keytypes function.
+#### Select, columns and keys are used together to extract data from an AnnotationDb object
+#### The role of the keytypes function is to provide information about the available key types that can be used **to extract metadata or annotations**. This function returns the columns that user can specified in select function.
+
+```{r, include=TRUE, echo=TRUE}
+library(GenomicFeatures)
+library(AnnotationDbi)
+keytypes(txdb)
+columns(txdb)
+```
+
+## selection
+### if we have some keys, we can use select to extract them. By simply using appropriate argument values with select we can specify what keys we want to look up values for (keys), what we want returned back (columns) and the type of keys that we are passing in (keytype).
+####  **TXNAME typically refers to the transcript name associated with a genomic feature. It is a label or identifier that represents a specific transcript within a genomic region.**
+
+```{r, include=TRUE, echo=TRUE}
+
+k <- keys(txdb, keytype="TXNAME")
+tx_map <- AnnotationDbi::select(txdb, keys = k, columns="GENEID", keytype = "TXNAME")
+View(tx_map)
+```
+
+
+```{r, include=TRUE, echo=TRUE}
+tx2gene <- tx_map
+head(tx2gene)
+#write.table(tx2gene, file="tx2gene.csv", row.names=FALSE, quote = FALSE)
+```
+
+```{r, include=TRUE, echo=TRUE}
+View(tx2gene)
+```
+
+##  Importind data
+### Importing transcript abundance datasets (getting counts from abundance=scaledTPM)
+### 1: file= quant_files: a character vector of filenames for the transcript-level abundances
+### 2: a two-column data.frame linking transcript id (column 1) to gene id (column 2). the column names are not relevant, but this column order must be used. this argument is required for gene-level summarization, and the tximport vignette describes how to construct this data.frame 
+
+```{r, include=TRUE, echo=TRUE}
+library(tximport)
+txi <- tximport(quant_files,type="kallisto",tx2gene = tx2gene)
+#head(txi)
+View(txi$counts)
+names(txi)
+str(txi)
+```
+## Tximport < DESeq2
+### To get the results from tximport(txi) into DESeq2 (function from tximport package)
+### Takes the results of tximport (counts data) 
+#### colData which is about the columns in my count data- the way our count data is formatted- (data about the columns in count data (samples)). that is why the sample info needs to be provided at first.
+####assigning the column name into rowname
+
+```{r, include=TRUE, echo=TRUE}
+sampleinfo <- read.delim(infile, sep=',')
+sampleinfo
+rownames(sampleinfo) <- sampleinfo$SampleName
+head(sampleinfo)
+```
+
+```{r, include=TRUE, echo=TRUE}
+all(rownames(sampleinfo) == colnames(txi$counts))
+```
+
+```{r, include=TRUE, echo=TRUE}
+
+sampleinfo$Genotype<- as.factor(sampleinfo$Genotype)
+sampleinfo$Treatment<- as.factor(sampleinfo$Treatment)
+sampleinfo$CID<- as.factor(sampleinfo$CID)
+str(sampleinfo)
+```
+## construct a DESeqDataSet
+## here we are just transfering the row counts without normalization
+
+```{r, include=TRUE, echo=TRUE}
+library(DESeq2)
+dds<- DESeqDataSetFromTximport(txi, colData=sampleinfo, design= ~ 0+ CID)
+dds <- estimateSizeFactors(dds)
+```
+```{r, include=TRUE, echo=TRUE}
+dds$Treatment
+dds$CID
+nrow(dds)#... to see the number of the rows in dds
+```
+
+## difference between txi & dds
+### counts allows us to extract the count data from dseqdata and will return count matrix (which is the results of tximport)
+#### counts from DESeq are rounded wihile deseq works with integer data
+
+```{r, include=TRUE, echo=TRUE}
+counts(dds)[1:5, 1:5] # but rounded 
+txi$counts[1:5, 1:5] # not rounded
+```
+
+
+```{r, include=TRUE, echo=TRUE}
+tpm <- txi$abundance
+write.csv(tpm, file="tpm_values.csv",quote=FALSE)
+
+```
+
+
+
+## high Variance genes
+### Calculation of raw wise variance. It computes the variance of each raw (each gene)
+#### selecting only 1000 genes with highest variance ........ (more explanation about these genes in OneNote)
+
+
+```{r, include=TRUE, echo=TRUE}
+topVargenes_dds <- head(       order( rowVars( assay(dds) )
+                                      ,decreasing=TRUE )
+                        ,1000 )
+write.csv(assay(dds[topVargenes_dds,]),file=paste(wd, "normalized_counts_topVar1000.csv", sep='/'))
+```
+
+
+## filtering non-zero counts
+### to identify rows (genes or features) in the GeneCounts object that have nonzero counts in **all samples**. It can be useful for filtering out rows with no expression across all samples.
+#### Removing the zero counts...based on the factorsize some rows will be returned as zero(due to the geometric mean and reatios)..now wee need to have only non zero ones
+#### For this, we make a function:  It takes a vector x (representing each row of GeneCounts) as input and checks if all the values in x are greater than zero using the all() function. The all() function returns TRUE if all the values in x are TRUE; otherwise, it returns FALSE.
+#### 1 means for raws. 2 means for columns..here we need raws as genes
+##### The variable **idx.nz** will be a logical vector indicating for each gene whether all the counts in that gene's row are greater than zero (TRUE) or not (FALSE).
+
+
+```{r, include=TRUE, echo=TRUE}
+
+GeneCounts <- counts(dds)
+idx.nz <- apply(GeneCounts, 1, function(x) { all(x > 0)})
+#idx.nz
+sum(idx.nz)
+head(GeneCounts[idx.nz, ])
+### extracting only none zero elements
+nz.counts <- subset(GeneCounts, idx.nz)
+```
+
+## Data Visualization {.tabset}
+
+### plot normalized and un-normalized counts in different ways to visualize {.tabset}
+#### multiecdf{.tabset}
+
+
+
+```{r, include=TRUE, echo=TRUE}
+library(geneplotter)
+
+un_mc<-  multiecdf(counts(dds, normalized = F)[idx.nz ,],xlab="mean counts", xlim=c(0, 1000), main="un-normalized counts")
+print(un_mc, with=50, height=40, cex.axis=1)
+
+
+n_mc<-  multiecdf(counts(dds, normalized = T)[idx.nz ,],xlab="mean counts", xlim=c(0, 1000),  main="normalized counts")
+print(n_mc, with=50, height=40, cex.axis=1)
+
+```
+
+
+#### density plot {.tabset}
+```{r, include=TRUE, echo=TRUE}
+png(file = paste(wd, "before_normalization1.png", sep='/'),width=6,height=6,units="in",res=1200)
+multidensity(counts(dds, normalized = F)[idx.nz ,],xlab="mean counts", xlim=c(0, 1000), main="un-normalized counts")
+dev.off()
+```
+
+
+```{r, include=TRUE, echo=TRUE}
+png(file = paste(wd, "after_normalization1.png", sep='/'),width=6,height=6,units="in",res=1200)
+multidensity(counts(dds, normalized = T)[idx.nz ,],xlab="mean counts", xlim=c(0, 1000), main="normalized counts")
+dev.off()
+```
+
+## low count gees filtration
+### While it is not necessary to pre-filter low count genes before running the DESeq2 functions, there are two reasons which make pre-filtering useful: by removing rows in which there are very few reads, we reduce the memory size of the dds data object, and we increase the speed of count modeling within DESeq2. It can also improve visualizations, as features with no information for differential expression are not plotted in dispersion plots or MA-plots. 
+#### **to filter out low-count genes that have total counts below a specified threshold (in this case, 10). It helps to focus on genes with higher expression levels for downstream analysis.**
+
+#### selection of the genes with the normalized counts(total counts) more then 10 (treshold)
+
+
+```{r, include=TRUE, echo=TRUE}
+library(limma)
+dds <- dds[ rowSums(counts(dds)) > 10, ]
+
+```
+
+## estimate dispersions and plot the main one. **Dispersion**: Variability within the groups
+
+
+```{r, include=TRUE, echo=TRUE}
+dds <- estimateDispersions(dds)
+```
+
+```{r, include=TRUE, echo=TRUE}
+plotDispEsts(dds)
+```
+
+```{r, include=TRUE, echo=TRUE}
+png(file = paste(wd, "Dispersion_plot.png", sep='/'),width=6,height=6,units="in",res=1200)
+plotDispEsts(dds)
+dev.off()
+```
+
+###make a colour vector of desired colors
+
+```{r, include=TRUE, echo=TRUE}
+
+statusCol <- c("0h"="#66C2A5", "6h"="#FFD92F","12h"="#8DA0CB", "1d"="#E78AC3", "2d"="#A6D854")
+
+```
+
+
+## Transformation Explanation:
+
+####### DESeqs "rlog transformation" replaces the VST we had before. It transforms the average of the genes across samples to a log2 scale but "pulls in" those genes for which the evidence for strong fold changes is weak due to low counts. 
+#### blind=FALSE means that differences between cell lines and treatment should not add to the variance-mean profile of the experiment. However, the experimental design is not used directly in the transformation, only in estimating the global amount of variability in the counts. ###
+
+```{r, include=TRUE, echo=TRUE}
+vsd <- varianceStabilizingTransformation(dds, blind=FALSE)
+View(vsd)
+write.csv(assay(vsd),file=paste(wd, "vsd.csv", sep='/'))
+```
+
+
+```{r, include=TRUE, echo=TRUE}
+#par(mar=c(10,4,1,1)+.1)
+
+
+png(file = paste(wd, " normalized library distribution.png", sep='/'),width=35,height=10,units="in",res=1200)
+boxplot(assay(vsd), xlab="", ylab="Log2 counts per million",las=2,main="Normalised Distributions",  col=statusCol)
+# Let's add a blue horizontal line that corresponds to the median logCPM
+abline(h=median(assay(vsd)), col="red")
+dev.off()
+
+```
+
+## Ordered 1000 High variance genes after the variance stabilizing 
+
+```{r, include=TRUE, echo=TRUE}
+topVargenes_dds <- head(order(rowVars(assay(vsd)),decreasing=TRUE),1000)
+write.csv(assay(vsd[topVargenes_dds, ]),file=paste(wd, "ordered_vsd_HV_1000.csv", sep='/'))
+
+```
+
+
+## Highe variance genes ordered
+
+```{r, include=TRUE, echo=TRUE}
+
+topVargenes_dds <- order(rowVars(assay(vsd)),decreasing=TRUE)
+write.csv(assay(vsd[topVargenes_dds, ]),file=paste(wd, "ordered_vsd_HV.csv", sep='/'))
+
+```
+
+
+## Normalization visualization{.tabset}
+
+```{r, include=TRUE, echo=TRUE}
+par( mfrow = c( 1, 2 ) )
+plot(log2(counts(dds, normalized=TRUE)[,1:2] + 1), pch=16, cex=0.3, main="log2_normalized")
+plot(assay(vsd)[,1:2],pch=16, cex=0.3, main="vsd normalized")
+
+```
+
+
+## to identify rows (genes) that have at least one count greater than zero across all samples.
+
+### compare normalized, counts, rlog transformed counts and vst counts 
+###  the purpose of the first command is to identify rows (genes) that have **at least** one count greater than zero across all samples.
+### includes genes with ***at least one nonzero count across all samples.***
+
+```{r, include=TRUE, echo=TRUE}
+#vsd <- varianceStabilizingTransformation(dds, fitType="local")
+notAllZero <- (rowSums(counts(dds))>0)
+```
+
+
+## Visualization {.tabset}
+
+### vsd plot {.tabset}
+
+```{r, include=TRUE, echo=TRUE}
+library(vsn)
+meanSdPlot(assay(vsd[notAllZero,]))
+```
+
+
+## plot top 20 genes of normalized counts, rlog transformed values and vst values for visualization
+```{r, include=TRUE, echo=TRUE}
+select <- order(rowMeans(counts(dds,normalized=TRUE)),	decreasing=TRUE)[1:20]
+
+```
+
+```{r, include=TRUE, echo=TRUE}
+plotPCA(vsd, intgroup=c("Genotype","Treatment"))
+```
+
+
+```{r, include=TRUE, echo=TRUE}
+plotPCA(vsd, intgroup="Treatment")
+plotPCA(vsd, intgroup="Genotype")
+```
+
+```{r, include=TRUE, echo=TRUE}
+
+df <- as.data.frame(colData(dds)[ ,c("Treatment","CID", "Genotype")])
+dim(df)
+```
+
+### vsd heatmap{.tabset}
+
+
+```{r, include=TRUE, echo=TRUE}
+png(file = paste(wd, " heatmap-vsd-top 20 genes.png", sep='/'),width=35,height=10,units="in",res=1200)
+pheatmap(assay(vsd)[select,], cluster_rows=FALSE, show_rownames=FALSE,cluster_cols=FALSE, annotation_col=df)
+dev.off()
+```
+
+## plot a heatmap of sample distances
+
+```{r, include=TRUE, echo=TRUE}
+library(pheatmap)
+library(RColorBrewer)
+options(repr.plot.width = 39, repr.plot.height = 25 )
+sampleDists <- dist(t(assay(vsd)))
+sampleDistMatrix <- as.matrix(sampleDists)
+rownames(sampleDistMatrix) <- paste(vsd$Treatment, vsd$CID, vsd$Genotype , sep="-")
+colnames(sampleDistMatrix) <- NULL
+colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+pheatmap(sampleDistMatrix, clustering_distance_rows=sampleDists,clustering_distance_cols=sampleDists,col=colors, main="heatmap_samples_distance")
+options(repr.plot.width = 12, repr.plot.height = 9, repr.plot.res = 200)
+```
+### saving the heatmap
+
+
+
+```{r, include=TRUE, echo=TRUE}
+png(file = paste(wd, "heatmap_samples_distance.png", sep='/'),width=15,height=15,units="in",res=1200)
+pheatmap(sampleDistMatrix, clustering_distance_rows=sampleDists,clustering_distance_cols=sampleDists,col=colors)
+dev.off()
+```
+
+```{r, include=TRUE, echo=TRUE}
+library(magrittr)
+options(repr.plot.width = 100, repr.plot.height = 8)
+
+cluster_t <- sampleinfo %>%
+  mutate(color_Treatment= case_when(Treatment=="control" ~ "green",
+                                    Treatment=="stress"~ "pink"))
+cluster_g <- sampleinfo %>%
+  mutate(color_genotype= case_when(Genotype=="BMW_2218" ~ "yellow",
+                                    Genotype=="BMW_2007" ~ "brown",
+                                    Genotype=="BMW_2267" ~ "blue",
+                                    Genotype=="BMW_2364" ~ "darkgreen",
+                                    Genotype=="BMW_2496" ~ "orange",
+                                    Genotype=="BMW_2156" ~ "aquamarine",
+                                    Genotype=="BMW_2095" ~ "cornsilk4",
+                                    Genotype=="BMW_2352" ~ "magenta",
+                                    Genotype=="BMW_2321" ~  "turquoise4",
+                                    Genotype=="BMW_2297" ~ "blueviolet"))
+
+cluster_CID <- sampleinfo %>%
+  mutate(color_CID= case_when(CID=="High" ~ "black",
+                                  CID=="Low"~ "deeppink2"))
+
+
+
+library(dendextend)
+png(file = paste(wd, "hierarchical clustering.png", sep='/'),width=20,height=10,units="in",res=1200)
+par(mar=c(10,6,2,5))
+sampleTree = as.dendrogram(hclust(sampleDists, method = "complete"));
+
+sampleTree %>%
+  set("leaves_pch", 10)%>%
+  set("labels_cex", 1)%>%
+  set("branches_lwd",3)%>%
+  color_branches(k=10) %>%
+#png(file = paste(wd, "clustering_labled.png", sep='/'),width=15,height=15,units="in",res=1200)
+plot( main="clustering of the Samples under drought condition")
+
+
+cluster_t<- cluster_t$color_Treatment
+cluster_g <- cluster_g$color_genotype
+cluster_CID<- cluster_CID$color_CID
+both_bars<- cbind(cluster_t, cluster_g , cluster_CID)
+colored_bars(colors = both_bars , dend=sampleTree , rowLabels=c("Treatment","Genotype", "CID"))
+
+legend(aes(x=20,y=260 ),
+legend=c( "Stress", "High", "Low" ),
+col=c( "pink","black", "deeppink2"),
+pch=c(20,20,20,20), bty="b", pt.cex=1.5, cex=0.8,
+text.col= "black", horiz=TRUE, inset=c(1,1))
+
+
+legend(aes(x=7,y=305 ),
+legend=c( "BMW_2218","BMW_2007","BMW_2267","BMW_2364","BMW_2496","BMW_2156","BMW_2095","BMW_2352","BMW_2321","BMW_2297"),
+col=c("yellow","brown","blue", "darkgreen", "orange", "aquamarine", "cornsilk4", "magenta", "turquoise4","blueviolet"),
+pch=c(20,20,20,20), bty="b", pt.cex=1.5, cex=0.8,
+text.col= "black", horiz=TRUE, inset=c(1,1))
+dev.off()
+```
+
+
+## PCA 
+### plot pca with each sample in different color
+
+```{r, include=TRUE, echo=TRUE}
+pcaData <- plotPCA(vsd, intgroup = "CID", returnData=TRUE, ntop=48370)
+percentVar <- round(100 * attr(pcaData, "percentVar"))
+```
+
+```{r, include=TRUE, echo=TRUE}
+sample_names<- pcaData$name
+sample_names<- gsub("BMW_", "", sample_names)
+sample_names
+class(sample_names)
+```
+
+```{r, include=TRUE, echo=TRUE}
+
+library(ggplot2)
+#options(repr.plot.width = 20, repr.plot.height = 9, repr.plot.res = 200)
+# Specify shape values for each unique level in Genotype
+
+shape_values <- c(22, 23, 24, 21, 25, 21, 25.5, 22.5, 23.5, 24.8)
+
+pca_plot<- ggplot(pcaData, aes(PC1, PC2, shape =CID, fill = CID)) +
+  geom_point(size = 3, stroke = 1, position = position_jitter(h = 0.5, w = 0.5), alpha = 0.8) +
+  scale_fill_manual(values = c("High" = "blue", "Low" = "pink")) +
+  xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+  ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+  scale_shape_manual(values = shape_values) +
+  guides(fill = guide_legend(override.aes = list(shape = c(22,23)))) +
+  coord_fixed()
+#pca_plot
+pca_plot + geom_text(aes(label = sample_names), size=2.5 ,nudge_x = 0.05, nudge_y = 0.5)
+
+```
+
+
+
+```{r, include=TRUE, echo=TRUE}
+png(file=paste(wd, "PCA-labled.png", sep='/') ,width=15,height=10,units="in",res=1200)	
+library(ggplot2)
+#options(repr.plot.width = 20, repr.plot.height = 9, repr.plot.res = 200)
+# Specify shape values for each unique level in Genotype
+#shape_values <- c(22, 23, 24, 21, 25, 21, 25.5, 22.5, 23.5, 24.8)
+
+
+pca_plot<- ggplot(pcaData, aes(PC1, PC2, shape =CID, fill = CID)) +
+  geom_point(size = 3, stroke = 1, position = position_jitter(h = 0.5, w = 0.5), alpha = 0.8) +
+  scale_fill_manual(values = c("High" = "blue", "Low" = "pink")) +
+  xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+  ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+  scale_shape_manual(values = shape_values) +
+  guides(fill = guide_legend(override.aes = list(shape =c(22,23)))) +
+  coord_fixed()
+#pca_plot
+pca_plot + geom_text(aes(label = sample_names), size=2.5 ,nudge_x = 0.05, nudge_y = 0.5)+
+    ggtitle("PCA plot for the samples under drought condition")+
+   theme(plot.title = element_text(hjust = 0.5))
+dev.off()
+```
+```{r, include=TRUE, echo=TRUE}
+png(file=paste(wd, "PCA2.png", sep='/') ,width=15,height=10,units="in",res=1200)	
+library(ggplot2)
+#options(repr.plot.width = 20, repr.plot.height = 9, repr.plot.res = 200)
+# Specify shape values for each unique level in Genotype
+#shape_values <- c(22, 23, 24, 21, 25, 21, 25.5, 22.5, 23.5, 24.8)
+
+
+pca_plot<- ggplot(pcaData, aes(PC1, PC2, shape =CID, fill = CID)) +
+  geom_point(size = 4, stroke = 1, position = position_jitter(h = 0.5, w = 0.5), alpha = 0.8) +
+   scale_fill_manual(
+    values = c("High" = "blue", "Low" = "pink"),
+    labels = c("High" = "High iWUE", "Low" = "Low iWUE")  # Rename legend labels here
+  ) +
+    
+  scale_shape_manual(values = shape_values, guide = "none") +
+  xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+  ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+  scale_shape_manual(values = shape_values) +
+  guides(fill = guide_legend(override.aes = list(shape =c(22,23)))) +
+  coord_fixed()+
+  ggtitle("PCA plot for the samples under drought condition")+
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 20),  # Change title size here
+    axis.title.x = element_text(size = 18),  # Change x label size here
+    axis.title.y = element_text(size = 18),
+    legend.title = element_text(size = 16),  # Legend title size
+    legend.text = element_text(size = 14)# Change y label size here
+  )
+pca_plot
+dev.off()
+```
+
+#```{r, include=TRUE, echo=TRUE}
+library(ggplot2)
+library(plotly)
+
+# Specify shape values for each unique level in Genotype
+shape_values <- c(22, 23, 24, 21, 25, 21, 25.5, 22.5, 23.5, 24.8)
+
+# Create the ggplot object
+p <- ggplot(pcaData, aes(PC1, PC2, shape = CID, color = CID, fill = Treatment)) +
+  geom_point(size = 3, stroke = 1, position = position_jitter(h = 0.5, w = 0.5), alpha = 0.8) +
+  scale_fill_manual(values = c("stress" = "red", "control" = "black")) +
+  xlab(paste0("PC1: ", percentVar[1], "% variance")) +
+  ylab(paste0("PC2: ", percentVar[2], "% variance")) +
+  scale_shape_manual(values = shape_values) +
+  guides(fill = guide_legend(override.aes = list(shape = 21))) +
+  coord_fixed()
+
+# Convert the ggplot object to a plotly object
+p_plotly <- ggplotly(p)
+
+# Display the interactive plot
+p_plotly
+#```
+
+## *differential expression analysis*
+## here the Normalization will be done automatically (by considering library size, sequencing depth)
+###Each gene’s counts are divided by the sample’s size factor internally when doing DGE testing.
+
+###### You don’t need to normalize manually unless you want to use the normalized counts for other purposes
+
+```{r, include=TRUE, echo=TRUE}
+library(DESeq2)
+dds <- DESeq(dds)
+```
+
+```{r, include=TRUE, echo=TRUE}
+
+resultsNames(dds)
+```
+## build results
+
+```{r, include=TRUE, echo=TRUE}
+res1 <- results(dds, contrast =c("CID", "Low", "High" ))
+res1
+```
+
+```{r, include=TRUE, echo=TRUE}
+model.matrix(design(dds), colData(dds))
+```
+
+```{r, include=TRUE, echo=TRUE}
+png(file=paste(wd, "valcanp plot.CID_Low_vs_High.png", sep='/') ,width=15,height=10,units="in",res=1200)
+par(mar=c(10,4,1,1))
+EnhancedVolcano(res1,
+                lab = rownames(res1),
+               x = 'log2FoldChange',
+                y = 'padj')
+dev.off()
+
+```
+
+
+
+```{r, include=TRUE, echo=TRUE}
+any(is.na(row.names(res1)))
+any(is.na(row.names(res1)))
+
+``` 
+##	build results for significant genes of the candidate genes showing a differential expression in VB in comparison to GfGa
+```{r, include=TRUE, echo=TRUE}
+library("AnnotationDbi")
+res1$CHROM <- mapIds(txdb,keys=row.names(res1),column="CDSCHROM", keytype="GENEID", multiVals="first")
+res1$CDSNAME <- mapIds(txdb,keys=row.names(res1),column="CDSNAME", keytype="GENEID", multiVals="first")
+res1$CDSSTART <- mapIds(txdb,keys=row.names(res1),column="CDSSTART", keytype="GENEID", multiVals="first")
+res1$CDSEND <- mapIds(txdb,keys=row.names(res1),column="CDSEND", keytype="GENEID", multiVals="first")
+res1$CDSSTRAND <- mapIds(txdb,keys=row.names(res1),column="CDSSTRAND", keytype="GENEID", multiVals="first")
+res1$symbol <- mcols(res1)$symbol
+```
+
+
+## Exporting only the results which pass an adjusted p value threshold 0.05
+
+```{r, include=TRUE, echo=TRUE}
+resSig1 <- subset(res1, padj <= 0.05 & abs(log2FoldChange) >= 1)#extract subset
+resSig1 <- as.data.frame(resSig1)#build a data frame from subset to write it out
+write.csv(resSig1,  file=paste(wd, "CID_Low_vs_High_results_sig_pvalue 0.05.csv", sep='/'))
+```
+
+
+
+## up regulated and downregulated genes
+```{r, include=TRUE, echo=TRUE}
+up <- subset(res1, padj <= 0.05& log2FoldChange > 1)
+write.csv(up,  file=paste(wd, "CID_Low_vs_High_results_0.05padj_log2fc1_up.csv", sep='/'))
+
+down <- subset(res1, padj <= 0.05 & log2FoldChange < -1)
+write.csv(down,  file=paste(wd, "CID_Low_vs_High_results__0.05padj_log2fc1_down.csv", sep='/'))
+```
+
+
+
+## Plotting results
+
+```{r, include=TRUE, echo=TRUE}
+png(file=paste(wd, "MA_plot_CID_Low_vs_High.png", sep='/') ,width=20,height=10,units="in",res=1200)
+#fig.show='hold'
+DESeq2::plotMA(res1, main="MA plot for the comparison betwen Low and High CID groups")
+dev.off()
+
+```
+
+```{r, include=TRUE, echo=TRUE}
+hist(res1$pvalue[res1$baseMean > 1], breaks=0:20/20, col="grey50", border="white")
+```
+
+
+## genes with the most variation of counts:
+```{r, include=TRUE, echo=TRUE}
+topVarGenes <- head(order(rowVars(assay(vsd)),decreasing=TRUE),30)
+```
+
+
+
+## resistance_sus_vs_res
+### genes with padj < 0.05:
+
+```{r, include=TRUE, echo=TRUE}
+resOrdered_CID_Low_vs_High <- res1[order(res1$padj,decreasing=FALSE),]#order genes by padj
+selected_genes_CID_Low_vs_High<-rownames(subset(resOrdered_CID_Low_vs_High, padj < 0.05))[1:30]
+
+```
+
+
+#heatmap of differentially expressed genes:
+
+```{r, include=TRUE, echo=TRUE}
+mat <- assay(vsd)[selected_genes_CID_Low_vs_High, ]
+mat <- mat - rowMeans(mat)
+```
+
+```{r, include=TRUE, echo=TRUE}
+thr <- 2 
+mat[mat < -thr] <- -thr
+mat[mat > thr] <- thr
+df <- as.data.frame(colData(vsd)[, c("CID","Treatment")])
+rownames(df) <- colnames(mat)
+#df$CID <- factor(df$CID)
+#df$Treatment <- factor(df$Treatment)
+```
+
+```{r, include=TRUE, echo=TRUE}
+annotation_colors <- list(
+       Treatment = c(stress = "red"),
+  CID=c(High="blue", Low="orange")
+)
+```
+
+```{r, include=TRUE, echo=TRUE}
+options(repr.plot.width = 25, repr.plot.height = 15, repr.plot.res = 200)
+breaks=seq(from=-thr, to=thr, length=101)
+pheatmap(mat, annotation_col=df,cluster_col=TRUE, cluster_rows = TRUE, annotation_colors=annotation_colors, fontsize = 10)
+```
+
+
+```{r, include=TRUE, echo=TRUE}
+png(file=paste(wd, "heatmap_CIDgroups_selected_DEG_30 top genes.png", sep='/') ,width=20,height=10,units="in",res=1200)	
+breaks=seq(from=-thr, to=thr, length=101)
+pheatmap(mat, annotation_col=df,cluster_col=TRUE, cluster_rows = TRUE, annotation_colors=annotation_colors)
+dev.off()
+```
+
+## now we should make the comparison between two CID groups but this time our reference is Low group
+#(names of the pics are saved as their ref level. here the Low group are reference and this is what we want to have low as reference , to see the changes in high group, these results were used later for overlapped gene s and further analysis)
+
+
+```{r, include=TRUE, echo=TRUE}
+res2 <- results(dds, contrast =c("CID", "High", "Low" ))
+res2
+```
+
+```{r, include=TRUE, echo=TRUE}
+model.matrix(design(dds), colData(dds))
+```
+
+```{r, include=TRUE, echo=TRUE}
+png(file=paste(wd, "valcanp plot.CID_High_vs_Low.png", sep='/') ,width=15,height=10,units="in",res=1200)
+par(mar=c(10,4,1,1))
+EnhancedVolcano(res2,
+                lab = rownames(res2),
+               x = 'log2FoldChange',
+                y = 'padj')
+dev.off()
+
+```
+
+
+
+```{r, include=TRUE, echo=TRUE}
+any(is.na(row.names(res2)))
+any(is.na(row.names(res2)))
+
+``` 
+##	build results for significant genes of the candidate genes showing a differential expression in VB in comparison to GfGa
+```{r, include=TRUE, echo=TRUE}
+library("AnnotationDbi")
+res2$CHROM <- mapIds(txdb,keys=row.names(res2),column="CDSCHROM", keytype="GENEID", multiVals="first")
+res2$CDSNAME <- mapIds(txdb,keys=row.names(res2),column="CDSNAME", keytype="GENEID", multiVals="first")
+res2$CDSSTART <- mapIds(txdb,keys=row.names(res2),column="CDSSTART", keytype="GENEID", multiVals="first")
+res2$CDSEND <- mapIds(txdb,keys=row.names(res2),column="CDSEND", keytype="GENEID", multiVals="first")
+res2$CDSSTRAND <- mapIds(txdb,keys=row.names(res2),column="CDSSTRAND", keytype="GENEID", multiVals="first")
+res2$symbol <- mcols(res2)$symbol
+```
+
+
+## Exporting only the results which pass an adjusted p value threshold 0.05
+
+```{r, include=TRUE, echo=TRUE}
+resSig2 <- subset(res2, padj <= 0.05 & abs(log2FoldChange) >= 1)#extract subset
+resSig2 <- as.data.frame(resSig2)#build a data frame from subset to write it out
+write.csv(resSig2,  file=paste(wd, "CID_High_vs_Low_results_sig_pvalue 0.05.csv", sep='/'))
+```
+
+
+
+## up regulated and downregulated genes
+```{r, include=TRUE, echo=TRUE}
+up <- subset(res2, padj <= 0.05& log2FoldChange > 1)
+write.csv(up,  file=paste(wd, "CID_High_vs_Low_results_0.05padj_log2fc1_up.csv", sep='/'))
+
+down <- subset(res2, padj <= 0.05 & log2FoldChange < -1)
+down
+write.csv(down,  file=paste(wd, "CID_High_vs_Low_results__0.05padj_log2fc1_down.csv", sep='/'))
+```
+
+
+
+## Plotting results
+
+```{r, include=TRUE, echo=TRUE}
+png(file=paste(wd, "MA_plot_CID_High_vs_Low.png", sep='/') ,width=20,height=10,units="in",res=1200)
+#fig.show='hold'
+DESeq2::plotMA(res2, main="MA plot for the comparison betwen High and Low CID groups")
+dev.off()
+
+```
+
+## genes with the most variation of counts:
+```{r, include=TRUE, echo=TRUE}
+topVarGenes <- head(order(rowVars(assay(vsd)),decreasing=TRUE),30)
+```
+
+
+
+## resistance_sus_vs_res
+### genes with padj < 0.05:
+
+```{r, include=TRUE, echo=TRUE}
+resOrdered_CID_High_vs_Low <- res2[order(res2$padj,decreasing=FALSE),]#order genes by padj
+selected_genes_CID_High_vs_Low<-rownames(subset(resOrdered_CID_High_vs_Low, padj < 0.05))[1:100]
+
+```
+
+
+#heatmap of differentially expressed genes:
+
+```{r, include=TRUE, echo=TRUE}
+mat <- assay(vsd)[selected_genes_CID_High_vs_Low, ]
+mat <- mat - rowMeans(mat)
+```
+
+```{r, include=TRUE, echo=TRUE}
+thr <- 2 
+mat[mat < -thr] <- -thr
+mat[mat > thr] <- thr
+df <- as.data.frame(colData(vsd)[, c("CID","Treatment")])
+rownames(df) <- colnames(mat)
+#df$CID <- factor(df$CID)
+#df$Treatment <- factor(df$Treatment)
+```
+
+```{r, include=TRUE, echo=TRUE}
+annotation_colors <- list(
+       Treatment = c(stress = "red"),
+  CID=c(High="blue", Low="orange")
+)
+```
+
+```{r, include=TRUE, echo=TRUE}
+options(repr.plot.width = 25, repr.plot.height = 15, repr.plot.res = 200)
+breaks=seq(from=-thr, to=thr, length=101)
+pheatmap(mat, annotation_col=df,cluster_col=TRUE, cluster_rows = TRUE, annotation_colors=annotation_colors, fontsize = 10)
+```
+
+
+```{r, include=TRUE, echo=TRUE}
+png(file=paste(wd, "heatmap_CIDgroups_selected_DEG_100 top genes.png", sep='/') ,width=20,height=15,units="in",res=1200)	
+breaks=seq(from=-thr, to=thr, length=101)
+pheatmap(mat, annotation_col=df,cluster_col=TRUE, cluster_rows = TRUE, annotation_colors=annotation_colors)
+dev.off()
+```
+
+###-------------------at this section all json files will be read to get the mapping rate across all the samples to report for the thesis
+```{r, include=TRUE, echo=TRUE}
+
+library(readxl)
+library(jsonlite)
+
+```
+
+
+
+```{r, include=TRUE, echo=TRUE}
+excel_path <- "C:/Users/SepidehJafarian/Desktop/BMW-transcriptom-analysis/03-1-2-1-DEGs-analysis-CID comparison-dropped-only drought - Copy/bmw-samples-info-modified - mapping-rate.csv"
+sample_info_2 <- read.csv(excel_path)
+
+# Preview the data
+head(sample_info_2)
+```
+
+
+
+```{r, include=TRUE, echo=TRUE}
+# Create a function to extract data from JSON
+extract_kallisto_stats <- function(SampleName, json_path, Genotype) {
+  if (!file.exists(json_path)) {
+    warning(paste("File not found:", json_path))
+    return(NULL)
+  }
+  
+  json_data <- fromJSON(json_path)
+  
+  data.frame(
+    Sample = SampleName,
+    Genotype = Genotype,
+    n_processed = json_data$n_processed,
+    n_pseudoaligned = json_data$n_pseudoaligned,
+    p_pseudoaligned = json_data$p_pseudoaligned,
+    n_unique = json_data$n_unique,
+    p_unique = json_data$p_unique,
+    stringsAsFactors = FALSE
+  )
+}
+
+# Apply the function to all rows
+mapping_stats <- mapply(
+  extract_kallisto_stats,
+  sample_info_2$SampleName,
+  sample_info_2$FileName,
+  sample_info_2$Genotype,
+  SIMPLIFY = FALSE
+)
+
+# Combine all rows into a single data frame
+mapping_df <- do.call(rbind, mapping_stats)
+
+# View the summary
+head(mapping_df)
+
+```
+
+
+
+
+
+```{r, include=TRUE, echo=TRUE}
+write.csv(mapping_df, "kallisto_mapping_summary_final.csv", row.names = FALSE)
+```
+
+
+
+
+
+```{r, include=TRUE, echo=TRUE}
+png(file = paste(wd, "mapping_rate.png", sep='/'),width=20,height=10,units="in",res=1200)
+library(ggplot2)
+ggplot(mapping_df, aes(x = Sample, y = p_pseudoaligned)) +
+  geom_col(fill = "dodgerblue") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  ylab("Pseudoalignment Rate (%)") +
+  ggtitle("Kallisto Mapping Summary per Sample")
+dev.off()
+
+```
+
+###------------------------ at this point i would like to select only candidate genes (found at the end of the experiment) and show them on heatmap
+
+
+```{r, include=TRUE, echo=TRUE}
+
+
+selected_genes<- c("TraesCS1D02G001500","TraesCS1D02G001700","TraesCS1D02G001800","TraesCS1D02G009500",
+                   "TraesCS1D02G010600","TraesCS1D02G013700","TraesCS1D02G013800","TraesCS4B02G113300",
+                   "TraesCS4B02G115500","TraesCS4B02G116800","TraesCS4D02G038000",
+                   "TraesCS4D02G041900","TraesCS4D02G042800","TraesCS4D02G044500","TraesCS6A02G312600",
+                   "TraesCS6A02G313300","TraesCS6A02G314300","TraesCS6B02G367100")
+
+
+mat <- assay(vsd)[selected_genes, ]  # only the 18 genes
+mat <- mat - rowMeans(mat)           # center rows
+
+
+
+thr <- 1 
+mat[mat < -thr] <- -thr
+mat[mat > thr] <- thr
+
+df <- as.data.frame(colData(vsd)[, c("CID","Treatment")])
+rownames(df) <- colnames(mat)
+
+annotation_colors <- list(
+  Treatment = c(stress = "red"),
+  CID = c(High = "blue", Low = "orange")
+
+)
+
+
+#png(file = paste(wd, "heatmap_of_final_candidate_genes.png", sep='/'),width=15,height=10,units="in",res=1200)
+library(pheatmap)
+options(repr.plot.width = 25, repr.plot.height = 15, repr.plot.res = 200)
+breaks <- seq(from=-thr, to=thr, length=101)
+
+pheatmap(mat,
+         annotation_col = df,
+         cluster_col = TRUE,
+         cluster_rows = TRUE,
+         annotation_colors = annotation_colors,
+         fontsize = 10)
+#dev.off()
+
+```
+
