@@ -1,0 +1,295 @@
+---
+title: "stack bar chart for all analysis"
+author: "Sepideh"
+date: "2024-10-15"
+output:
+  html_document:
+    toc: yes
+    toc_depth: '3'
+    df_print: paged
+  rmarkdown::html_document:
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+    toc_depth: 3
+    number_sections: yes
+editor_options:
+  chunk_output_type: inline
+  root.dir: "C:/Users/SepidehJafarian/Desktop/barchart-combining analysis"
+---
+
+```{r, setup, include=TRUE, echo=TRUE, eval=FALSE, warning=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(tidyr)
+library(ggplot2)
+library(dplyr)
+library(magrittr)
+library(knitr)
+set.seed(286)
+```
+
+```{r, include=TRUE}
+
+
+getwd()
+wd="C:/Users/SepidehJafarian/Desktop/barchart-combining analysis"
+
+```
+
+```{r}
+qtl<- read.csv("all_qtls_info.csv", sep=",", header=TRUE)
+deg<- read.csv("all_deg_info.csv", sep=",", header=TRUE)
+deg_CID<- read.csv("all_deg_info _CID_only.csv", sep=",", header=TRUE)
+wgcna<- read.csv("genes_modules_info.csv", sep=",", header=TRUE)
+
+```
+
+# Count total genes per module
+
+```{r}
+library(magrittr)
+total_genes <- wgcna %>%
+  group_by(module_color) %>%
+  summarise(Total_Genes = n())
+
+```
+
+# Count differentially expressed genes per module
+
+```{r}
+dge_genes <- deg %>%
+  filter(gene_id %in% wgcna$gene_id) %>%
+ left_join(wgcna, by = "gene_id") %>%
+  group_by(module_color) %>%
+  summarise(DGE_Genes = n())
+
+```
+
+
+# Count common genes in QTL
+```{r}
+common_genes <- wgcna %>%
+  filter(gene_id %in% qtl$gene_id) %>%
+  group_by(module_color) %>%
+  summarise(Common_Genes = n())
+
+```
+
+# Combine all data into one data frame
+
+```{r}
+combined_data <- total_genes %>%
+  left_join(dge_genes, by = "module_color") %>%
+  left_join(common_genes, by = "module_color") %>%
+  replace_na(list(DGE_Genes = 0, Common_Genes = 0))
+
+```
+
+
+```{r}
+# Reshape the data for ggplot
+
+#png(file=paste(wd, "stackbar for transcriptome analysis.png", sep='/') ,width=20,height=15,units="in",res=1200)
+combined_long <- combined_data %>%
+  pivot_longer(cols = c("Total_Genes", "DGE_Genes", "Common_Genes"),
+               names_to = "Category", values_to = "Count")
+
+# Create the stacked bar chart
+ggplot(combined_long, aes(x = module_color, y = Count, fill = Category)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Gene Counts by Module",
+       x = "Modules",
+       y = "Number of Genes") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set3") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+#dev.off()
+
+```
+
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# barchart for the common genes between WGCNA and DGE for each modul and the requlation
+```{r}
+library(dplyr)
+library(tidyr)
+
+
+# Identify common genes between WGCNA and DGE
+common_genes <- deg_CID %>%
+  filter(gene_id %in% wgcna$gene_id)
+
+# Create separate data frames for upregulated and downregulated genes
+upregulated_genes <- common_genes %>%
+  filter(log2FoldChange > 1) %>%
+  left_join(wgcna, by = "gene_id") %>%
+  group_by(module_color) %>%
+  summarise(Upregulated = n(), .groups = 'drop')
+
+downregulated_genes <- common_genes %>%
+  filter(log2FoldChange < 1) %>%
+  left_join(wgcna, by = "gene_id") %>%
+  group_by(module_color) %>%
+  summarise(Downregulated = n(), .groups = 'drop')
+
+# Combine the counts into a single data frame
+combined_data <- upregulated_genes %>%
+  full_join(downregulated_genes, by = "module_color") %>%
+  replace_na(list(Upregulated = 0, Downregulated = 0))
+
+```
+
+
+```{r}
+# Reshape the data for ggplot
+combined_long <- combined_data %>%
+  pivot_longer(cols = c("Upregulated", "Downregulated"),
+               names_to = "Expression", values_to = "Count")
+
+```
+
+```{r}
+library(ggplot2)
+
+
+
+#png(file=paste(wd, "stack_bar_wgcna_deg.png", sep='/') ,width=20,height=15,units="in",res=1200)
+ggplot(combined_long, aes(x = module_color, y = Count, fill = Expression)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Common Genes Between WGCNA and DGE by Module",
+       x = "Modules",
+       y = "Number of Genes") +
+  scale_fill_manual(values = c("Upregulated" = "mediumpurple", "Downregulated" = "cornsilk2")) +
+  theme_minimal() +
+  
+  theme(
+    plot.title = element_text(hjust = 0.5, color = "black", size=18),  # Center title and set color
+    axis.text = element_text(color = "black", size=15),                # Set axis text color
+    axis.title = element_text(color = "black", size=16),  
+    axis.title.y = element_text(color = "black", size = 16),  # Set axis titles color
+    panel.grid.major = element_blank(),                        # Remove major grid lines
+    panel.grid.minor = element_blank(),
+     legend.text = element_text(size = 15),
+    legend.title = element_text(size = 16),  
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+#dev.off()
+
+```
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# adding QTL information into the graph
+
+# Assuming 'common_genes' contains the common genes from deg and wgcna
+# You can join the common genes with wgcna to get the module labels
+# Get the common genes between QTL and common genes
+
+
+
+# Assuming your data frames are named 'deg', 'wgcna', and 'qtl'
+```{r}
+# Step 1: Identify common genes between QTL and common genes
+rm(common_genes)
+common_genes <- deg_CID %>%
+  filter(gene_id %in% wgcna$gene_id)
+
+# Create a separate data frame for the common genes in QTL
+common_qtl_genes <- common_genes %>%
+  filter(gene_id %in% qtl$gene_id) %>%
+  left_join(wgcna, by = "gene_id") %>%
+  group_by(module_color) %>%
+  summarise(QTL_Common_Genes = n(), .groups = 'drop')
+
+# Step 2: Combine the QTL common genes count with your existing combined data
+combined_data <- combined_data %>%
+  left_join(common_qtl_genes, by = "module_color") %>%
+  replace_na(list(QTL_Common_Genes = 0))  # Replace NA with 0 for modules without QTL common genes
+
+# Step 3: Reshape the data for plotting
+rm(combined_long)
+combined_long <- combined_data %>%
+  pivot_longer(cols = c("Upregulated", "Downregulated", "QTL_Common_Genes"),
+               names_to = "Expression", values_to = "Count")
+
+# Step 4: Update the ggplot
+png(file=paste(wd, "Common Genes Between WGCNA, DGE, and QTL by Module.test.png", sep='/') ,width=20,height=15,units="in",res=1200)
+ggplot(combined_long, aes(x = module_color, y = Count, fill = Expression)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Common Genes Between WGCNA, DGE, and QTL by Module",
+       x = "Modules",
+       y = "Number of Genes") +
+  scale_fill_manual(values = c("Upregulated" = "mediumpurple", 
+                                "Downregulated" = "cornsilk2", 
+                                "QTL_Common_Genes" = "red")) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, color = "black", size=18),  # Center title and set color
+    axis.text = element_text(color = "black", size=15),                # Set axis text color
+    axis.title = element_text(color = "black", size=16),  
+    axis.title.y = element_text(color = "black", size = 16),  # Set axis titles color
+    panel.grid.major = element_blank(),                        # Remove major grid lines
+    panel.grid.minor = element_blank(),
+     legend.text = element_text(size = 15),
+    legend.title = element_text(size = 16),  
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+dev.off()
+```
+
+```{r}
+png(file=paste(wd, "Common Genes Between WGCNA, DGE, and QTL by Module2.png", sep='/') ,width=18,height=17,units="in",res=1200)
+ggplot(combined_long, aes(x = module_color, y = Count, fill = Expression)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Common Genes Between WGCNA, DGE, and QTL by Module",
+       x = "Modules",
+       y = "Number of Genes") +
+  scale_fill_manual(values = c("Upregulated" = "mediumpurple", 
+                                "Downregulated" = "cornsilk2", 
+                                "QTL_Common_Genes" = "red")) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, color = "black", size=18),  # Center title and set color
+    axis.text = element_text(color = "black", size=15),                # Set axis text color
+    axis.title = element_text(color = "black", size=16),  
+    axis.title.y = element_text(color = "black", size = 16),  # Set axis titles color
+    panel.grid.major = element_blank(),                        # Remove major grid lines
+    panel.grid.minor = element_blank(),
+     legend.text = element_text(size = 15),
+    legend.title = element_text(size = 16),  
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+dev.off()
+```
+
+
+
+
+```{r}
+png(file=paste(wd, "Common Genes Between WGCNA, DGE, and QTL by Module4.png", sep='/') ,width=20,height=17,units="in",res=1200)
+ggplot(combined_long, aes(x = module_color, y = Count, fill = Expression)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Common Genes Between WGCNA, DGE, and QTL by Module",
+       x = "Modules",
+       y = "Number of the Genes") +
+  scale_fill_manual(values = c("Upregulated" = "#1f78b4", 
+                                "Downregulated" = "#999999", 
+                                "QTL_Common_Genes" = "red")) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, color = "black", size=18),  # Center title and set color
+    axis.text = element_text(color = "black", size=15),                # Set axis text color
+    axis.title = element_text(color = "black", size=16),  
+    axis.title.y = element_text(color = "black", size = 16),  # Set axis titles color
+    panel.grid.major = element_blank(),                        # Remove major grid lines
+    panel.grid.minor = element_blank(),
+     legend.text = element_text(size = 15),
+    legend.title = element_text(size = 16),  
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+dev.off()
+```
