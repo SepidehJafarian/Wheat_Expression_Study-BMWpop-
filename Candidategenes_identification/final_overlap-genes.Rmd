@@ -1,0 +1,288 @@
+---
+title: "overlapp genes between WGCNA,QTLs and DEGs"
+author: "Sepideh"
+date: "2024-07-19"
+output:
+  html_document:
+    toc: yes
+    toc_depth: '3'
+    df_print: paged
+  rmarkdown::html_document:
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+    toc_depth: 3
+    number_sections: yes
+editor_options:
+  chunk_output_type: inline
+  root.dir: "C:/Users/SepidehJafarian/Desktop/Overlap genes"
+---
+
+```{r, setup, include=TRUE, echo=TRUE, eval=FALSE, warning=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(tidyr)
+library(ggplot2)
+library(dplyr)
+library(magrittr)
+library(knitr)
+set.seed(675)
+```
+
+
+
+
+```{r, include=TRUE}
+require("knitr")
+opts_knit$set(root.dir = "C:/Users/SepidehJafarian/Desktop/Overlap genes")
+getwd()
+wd="C:/Users/SepidehJafarian/Desktop/Overlap genes"
+
+```
+
+
+
+##readin QTLs data
+
+
+```{r, include=TRUE}
+qtl_1D<- read.csv("Annot_Isotope_MR19_1D_TA002086.1469.csv", sep=";", header=TRUE)
+qtl_2B<- read.csv("Annot_Isotope_MR19_2B_loc168.csv", sep=";", header=TRUE)
+qtl_4B<- read.csv("Annot_Isotope_MR19_4B_BS00030843_51.csv", sep=";", header=TRUE)
+qtl_4D<- read.csv("Annot_Isotope_MR19_4D_TG0011a.csv", sep=";", header=TRUE)
+qtl_6A<- read.csv("Annot_Isotope_MR19_6A_loc188.csv", sep=";", header=TRUE)
+qtl_6B<- read.csv("Annot_Isotope_MR19_6B_CAP7_c7065_166.csv", sep=";", header=TRUE)
+
+
+
+qtl_data<- rbind(qtl_1D, qtl_2B, qtl_4B, qtl_4D, qtl_6A, qtl_6B )
+#write.table(qtl_data, "all_qtls_info.csv", sep=",", row.names = FALSE, col.names = TRUE)
+```
+
+
+## reading DEG data (CID)
+
+```{r, include=TRUE}
+up_cid<-read.csv("CID_High_vs_Low_results_0.05padj_log2fc1_up.csv", sep=",", header=TRUE) 
+up_cid$Set<- "Hcid_up" 
+
+
+down_cid<-read.csv("CID_High_vs_Low_results__0.05padj_log2fc1_down.csv", sep=",", header=TRUE) 
+down_cid$Set<- "Hcid_down"
+
+deg_data_cid_drought <-rbind(up_cid, down_cid )
+dim(deg_data_cid_drought)
+colnames(deg_data_cid_drought)[1]<- "gene_id"
+```
+
+
+##Treatment data
+
+```{r, include=TRUE}
+up_drought<- read.csv("results_stress_vs_control_0.05padj_log2fc1_up.csv", sep=",", header=TRUE)
+up_drought$Set<- "stress_up"
+
+
+
+down_drought<-  read.csv("results_stress_vs_control_0.05padj_log2fc1_down.csv", sep=",", header=TRUE)
+down_drought$Set<- "stress_down"
+
+
+
+deg_data <-rbind(up_drought, down_drought,up_cid, down_cid )
+colnames(deg_data)[1]<- "gene_id"
+#write.table(deg_data, "all_deg_info.csv", sep=",", row.names = FALSE, col.names = TRUE)
+
+
+deg_data_treatment<- rbind(up_drought, down_drought)
+colnames(deg_data_treatment)[1]<- "gene_id"
+```
+
+
+## reading WGCNA data
+
+```{r, include=TRUE}
+
+wgcna_data<- read.csv("genes_modules_info.csv", sep=",", header = TRUE)
+wgcna_data[1]<- NULL
+colnames(wgcna_data)[1]<- "gene_id"
+```
+
+
+
+
+```{r, include=TRUE}
+View(qtl_data)
+View(deg_data)
+View(wgcna_data)
+```
+
+
+
+```{r, include=TRUE}
+
+common_gene_ids <- Reduce(intersect, list(qtl_data$gene_id, deg_data$gene_id, wgcna_data$gene_id))
+print(common_gene_ids)
+```
+
+
+
+```{r, include=TRUE}
+qtl_data_common <- qtl_data %>% filter(gene_id %in% common_gene_ids)
+deg_data_common <- deg_data %>% filter(gene_id %in% common_gene_ids)
+wgcna_data_common <- wgcna_data %>% filter(gene_id %in% common_gene_ids)
+
+ write.table(qtl_data_common, "final_overlaped_qtl.csv", sep=",", row.names = FALSE, col.names = TRUE)
+ write.table(deg_data_common , "final_overlaped_deg.csv", sep=",", row.names = FALSE, col.names = TRUE)
+ write.table(wgcna_data_common, "final_overlaped_wgcna.csv", sep=",", row.names = FALSE, col.names = TRUE)
+
+```
+
+# reading all 3 files and combining together for further investigation
+
+```{r, include=TRUE}
+
+qtl<- read.csv( "final_overlaped_qtl.csv",  sep=",", header=TRUE)
+deg<- read.csv("final_overlaped_deg.csv", sep=",", header=TRUE)
+wgcna<- read.csv( "final_overlaped_wgcna.csv",  sep=",", header=TRUE)
+
+```
+
+
+```{r, include=TRUE}
+
+final_result_overlapped <- inner_join(qtl, deg, by="gene_id") %>%
+  inner_join(wgcna, by="gene_id")
+write.table(final_result_overlapped, "final_result_overlapped.csv", sep=",", row.names = FALSE, col.names = TRUE)
+
+```
+
+
+```{r, include=TRUE}
+
+new_common_gene_ids <- Reduce(intersect, list(qtl_data$gene_id, deg_data_cid_drough$gene_id, wgcna_data$gene_id))
+print(new_common_gene_ids)
+length(new_common_gene_ids)
+```
+
+
+
+
+
+
+
+```{r, include=TRUE}
+
+new_common_gene_ids_try <- Reduce(intersect, list( deg_data_treatment$gene_id,deg_data_cid_drought$gene_id, wgcna_data$gene_id))
+print(new_common_gene_ids_try)
+dim(new_common_gene_ids_try)
+new_common_gene_ids_try<- as.data.frame(new_common_gene_ids_try)
+colnames(new_common_gene_ids_try)[1]<- "gene_id"
+
+
+new_common_gene_ids_try2<- Reduce(intersect, list(qtl_data$gene_id , new_common_gene_ids_try$gene_id))
+```
+
+
+
+
+
+#------------ considering DGE only for CIDs in droiught
+```{r, include=TRUE}
+require("knitr")
+opts_knit$set(root.dir = "C:/Users/SepidehJafarian/Desktop/Overlap genes")
+getwd()
+wd="C:/Users/SepidehJafarian/Desktop/Overlap genes"
+
+```
+
+
+
+##readin QTLs data
+
+
+```{r, include=TRUE}
+qtl_1D<- read.csv("Annot_Isotope_MR19_1D_TA002086.1469.csv", sep=";", header=TRUE)
+qtl_2B<- read.csv("Annot_Isotope_MR19_2B_loc168.csv", sep=";", header=TRUE)
+qtl_4B<- read.csv("Annot_Isotope_MR19_4B_BS00030843_51.csv", sep=";", header=TRUE)
+qtl_4D<- read.csv("Annot_Isotope_MR19_4D_TG0011a.csv", sep=";", header=TRUE)
+qtl_6A<- read.csv("Annot_Isotope_MR19_6A_loc188.csv", sep=";", header=TRUE)
+qtl_6B<- read.csv("Annot_Isotope_MR19_6B_CAP7_c7065_166.csv", sep=";", header=TRUE)
+
+
+
+qtl_data<- rbind(qtl_1D, qtl_2B, qtl_4B, qtl_4D, qtl_6A, qtl_6B )
+#write.table(qtl_data, "all_qtls_info.csv", sep=",", row.names = FALSE, col.names = TRUE)
+```
+
+
+## reading DEG data (CID)
+
+```{r, include=TRUE}
+up_cid<-read.csv("CID_High_vs_Low_results_0.05padj_log2fc1_up.csv", sep=",", header=TRUE) 
+up_cid$Set<- "Hcid_up" 
+
+
+down_cid<-read.csv("CID_High_vs_Low_results__0.05padj_log2fc1_down.csv", sep=",", header=TRUE) 
+down_cid$Set<- "Hcid_down"
+
+deg_data_cid_drought <-rbind(up_cid, down_cid )
+dim(deg_data_cid_drought)
+colnames(deg_data_cid_drought)[1]<- "gene_id"
+```
+
+
+##Treatment data
+
+```{r, include=TRUE}
+#up_drought<- read.csv("results_stress_vs_control_0.05padj_log2fc1_up.csv", sep=",", header=TRUE)
+#up_drought$Set<- "stress_up"
+
+
+
+#down_drought<-  read.csv("results_stress_vs_control_0.05padj_log2fc1_down.csv", sep=",", header=TRUE)
+#down_drought$Set<- "stress_down"
+
+
+
+deg_data <-rbind(up_cid, down_cid )
+colnames(deg_data)[1]<- "gene_id"
+#write.table(deg_data, "all_deg_info.csv", sep=",", row.names = FALSE, col.names = TRUE)
+
+
+#deg_data_treatment<- rbind(up_drought, down_drought)
+#colnames(deg_data_treatment)[1]<- "gene_id"
+```
+
+
+## reading WGCNA data
+
+```{r, include=TRUE}
+
+wgcna_data<- read.csv("genes_modules_info.csv", sep=",", header = TRUE)
+wgcna_data[1]<- NULL
+colnames(wgcna_data)[1]<- "gene_id"
+```
+
+
+
+
+```{r, include=TRUE}
+View(qtl_data)
+View(deg_data)
+View(wgcna_data)
+```
+
+
+
+```{r, include=TRUE}
+
+common_gene_ids <- Reduce(intersect, list(qtl_data$gene_id, deg_data$gene_id, wgcna_data$gene_id))
+print(common_gene_ids)
+View(common_gene_ids)
+```
+
+
+
+## I have not saved these 18 candidate genes yet, while I have the all in the final overlap genes
