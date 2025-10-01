@@ -1,0 +1,357 @@
+---
+title: "modul-specific-barchart-percentage"
+author: "Sepideh"
+date: "2024-07-09"
+output:
+  toc: yes
+    toc_depth: '3'
+    df_print: paged
+  rmarkdown::html_document:
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+    toc_depth: 3
+    number_sections: yes
+editor_options:
+  chunk_output_type: inline
+  root.dir: "C:/Users/SepidehJafarian/Desktop/WGCNA_comprehensive_traits_isotope/Enrichment_comprehensive_results/percentage of the barcharts for each sig modul"
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(stringr)
+library(readr)
+library(plotly)
+library(htmlwidgets)
+library(tidyr)
+library(ggplot2)
+library(ggBubbles)
+library(magrittr)
+library(knitr)
+set.seed(641)
+```
+
+
+```{r , include=FALSE}
+wd="C:/Users/SepidehJafarian/Desktop/WGCNA_comprehensive_traits_isotope/Enrichment_comprehensive_results/percentage of the barcharts for each sig modul"
+file_path <- "C:/Users/SepidehJafarian/Desktop/WGCNA_comprehensive_traits_isotope/Enrichment_comprehensive_results/percentage of the barcharts for each sig modul"
+```
+
+
+
+```{r , include=FALSE}
+
+
+# Read the CSV file
+df <- read.csv("separated_summarized_enrichmenr_wgcna_results_final.csv")
+
+# Filter for darkred module
+darkred_df <- df %>% filter(ModuleColor == "darkred")
+
+# Count occurrences of each description
+description_counts <- darkred_df %>%
+  count(Description) %>%
+  mutate(Percentage = (n / sum(n)) * 100)
+sum(description_counts $Percentage)
+
+
+png(file= paste(wd, "darkred.png", sep="/"), width=15, height=12,units = "in", res=1200)
+# Plot the bar chart
+ggplot(description_counts, aes(x = reorder(Description, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "darkred") +
+  coord_flip() +  
+   scale_y_continuous(name = "Percentage (%)", 
+                     limits = c(0, 10),  # Set y-axis limits from 0 to 100
+                     breaks = seq(0, 10, by = 5),  # Set breaks every 20%
+                     labels = function(x) paste0(x, "%")) +# Flip to make labels readable
+  theme_minimal() +
+  labs(title = "Functional Enrichment in Darkred Module",
+       x = "Description",
+       y = "Percentage (%)") +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1, color = "black"),
+        axis.text.y = element_text(color = "black"),
+        title = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+    
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
+dev.off()
+
+```
+
+
+
+```{r , include=FALSE}
+
+
+
+# Filter for darkred module
+brown_df <- df %>% filter(ModuleColor == "brown")
+
+# Count occurrences of each description
+description_counts <- brown_df %>%
+  count(Description) %>%
+  mutate(Percentage = (n / sum(n)) * 100)
+sum(description_counts $Percentage)
+
+
+png(file= paste(wd, "brown.png", sep="/"), width=18, height=20,units = "in", res=1200)
+# Plot the bar chart
+ggplot(description_counts, aes(x = reorder(Description, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "brown") +
+  coord_flip() +  
+   scale_y_continuous(name = "Percentage (%)", 
+                     limits = c(0, 10),  # Set y-axis limits from 0 to 100
+                     breaks = seq(0, 10, by = 5),  # Set breaks every 20%
+                     labels = function(x) paste0(x, "%")) +# Flip to make labels readable
+  theme_minimal() +
+  labs(title = "Functional Enrichment in Brown Module",
+       x = "Description",
+       y = "Percentage (%)") +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1, color = "black"),
+        axis.text.y = element_text(color = "black"),
+        title = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+    
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
+dev.off()
+
+
+```
+
+
+
+```{r , include=FALSE}
+# Filter for darkred module
+antiquewhite2_df <- df %>% filter(ModuleColor == "antiquewhite2")
+
+# Count occurrences of each description
+description_counts <- antiquewhite2_df %>%
+  count(Description) %>%
+  mutate(Percentage = (n / sum(n)) * 100)
+sum(description_counts $Percentage)
+
+
+png(file= paste(wd, "antiquewhite2.png", sep="/"), width=10, height=5,units = "in", res=1200)
+# Plot the bar chart
+ggplot(description_counts, aes(x = reorder(Description, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "lightblue") +
+  coord_flip() +  
+   scale_y_continuous(name = "Percentage (%)", 
+                     limits = c(0, 20),  # Set y-axis limits from 0 to 100
+                     breaks = seq(0, 20, by = 5),  # Set breaks every 20%
+                     labels = function(x) paste0(x, "%")) +
+  theme_bw()+
+  # Flip to make labels readable
+  theme_minimal() +
+  labs(title = "Functional Enrichment in antiquewhite2 Module",
+       x = "Description")+
+       #y = "Percentage (%)") +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1, color = "black"),
+        axis.text.y = element_text(color = "black"),
+        title = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"),
+   panel.grid = element_blank()) 
+    
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
+dev.off()
+
+
+```
+
+
+
+```{r , include=FALSE}
+
+sienna3_df <- df %>% filter(ModuleColor == "sienna3")
+
+# Count occurrences of each description
+description_counts <- sienna3_df %>%
+  count(Description) %>%
+  mutate(Percentage = (n / sum(n)) * 100)
+sum(description_counts $Percentage)
+
+
+png(file= paste(wd, "sienna3.png", sep="/"), width=10, height=5,units = "in", res=1200)
+# Plot the bar chart
+ggplot(description_counts, aes(x = reorder(Description, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "sienna3") +
+  coord_flip() +  
+   scale_y_continuous(name = "Percentage (%)", 
+                     limits = c(0, 20),  # Set y-axis limits from 0 to 100
+                     breaks = seq(0, 20, by = 5),  # Set breaks every 20%
+                     labels = function(x) paste0(x, "%")) +
+  theme_bw()+
+  # Flip to make labels readable
+  theme_minimal() +
+  labs(title = "Functional Enrichment in sienna3 Module",
+       x = "Description")+
+       #y = "Percentage (%)") +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1, color = "black"),
+        axis.text.y = element_text(color = "black"),
+        title = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"),
+   panel.grid = element_blank()) 
+    
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
+dev.off()
+```
+
+
+
+```{r , include=FALSE}
+
+tan_df <- df %>% filter(ModuleColor == "tan")
+
+# Count occurrences of each description
+description_counts <- tan_df %>%
+  count(Description) %>%
+  mutate(Percentage = (n / sum(n)) * 100)
+sum(description_counts $Percentage)
+
+
+png(file= paste(wd, "tan.png", sep="/"), width=10, height=5,units = "in", res=1200)
+# Plot the bar chart
+ggplot(description_counts, aes(x = reorder(Description, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "tan") +
+  coord_flip() +  
+   scale_y_continuous(name = "Percentage (%)", 
+                     limits = c(0, 20),  # Set y-axis limits from 0 to 100
+                     breaks = seq(0, 20, by = 5),  # Set breaks every 20%
+                     labels = function(x) paste0(x, "%")) +
+  theme_bw()+
+  # Flip to make labels readable
+  theme_minimal() +
+  labs(title = "Functional Enrichment in tan Module",
+       x = "Description")+
+       #y = "Percentage (%)") +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1, color = "black"),
+        axis.text.y = element_text(color = "black"),
+        title = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"),
+   panel.grid = element_blank()) 
+    
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
+dev.off()
+
+```
+
+
+```{r , include=FALSE}
+
+orange_df <- df %>% filter(ModuleColor == "orange")
+
+# Count occurrences of each description
+description_counts <- orange_df %>%
+  count(Description) %>%
+  mutate(Percentage = (n / sum(n)) * 100)
+sum(description_counts $Percentage)
+
+
+png(file= paste(wd, "orange.png", sep="/"), width=10, height=10,units = "in", res=1200)
+# Plot the bar chart
+ggplot(description_counts, aes(x = reorder(Description, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "orange") +
+  coord_flip() +  
+   scale_y_continuous(name = "Percentage (%)", 
+                     limits = c(0, 20),  # Set y-axis limits from 0 to 100
+                     breaks = seq(0, 20, by = 5),  # Set breaks every 20%
+                     labels = function(x) paste0(x, "%")) +
+  theme_bw()+
+  # Flip to make labels readable
+  theme_minimal() +
+  labs(title = "Functional Enrichment in orange Module",
+       x = "Description")+
+       #y = "Percentage (%)") +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1, color = "black"),
+        axis.text.y = element_text(color = "black"),
+        title = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"),
+   panel.grid = element_blank()) 
+    
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
+dev.off()
+```
+
+
+```{r , include=FALSE}
+
+
+lightsteelblue1_df <- df %>% filter(ModuleColor == "lightsteelblue1")
+
+# Count occurrences of each description
+description_counts <- lightsteelblue1_df %>%
+  count(Description) %>%
+  mutate(Percentage = (n / sum(n)) * 100)
+sum(description_counts $Percentage)
+
+
+png(file= paste(wd, "lightsteelblue1.png", sep="/"), width=15, height=5,units = "in", res=1200)
+# Plot the bar chart
+ggplot(description_counts, aes(x = reorder(Description, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "lightsteelblue1") +
+  coord_flip() +  
+   scale_y_continuous(name = "Percentage (%)", 
+                     limits = c(0, 35),  # Set y-axis limits from 0 to 100
+                     breaks = seq(0, 35, by = 10),  # Set breaks every 20%
+                     labels = function(x) paste0(x, "%")) +
+  theme_bw()+
+  # Flip to make labels readable
+  theme_minimal() +
+  labs(title = "Functional Enrichment in lightsteelblue1 Module",
+       x = "Description")+
+       #y = "Percentage (%)") +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1, color = "black"),
+        axis.text.y = element_text(color = "black"),
+        title = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"),
+   panel.grid = element_blank()) 
+    
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
+dev.off()
+```
+
+
+```{r , include=FALSE}
+
+
+orangered3_df <- df %>% filter(ModuleColor == "orangered3")
+
+# Count occurrences of each description
+description_counts <- orangered3_df %>%
+  count(Description) %>%
+  mutate(Percentage = (n / sum(n)) * 100)
+sum(description_counts $Percentage)
+
+
+png(file= paste(wd, "orangered3.png", sep="/"), width=15, height=5,units = "in", res=1200)
+# Plot the bar chart
+ggplot(description_counts, aes(x = reorder(Description, -Percentage), y = Percentage)) +
+  geom_bar(stat = "identity", fill = "orangered3") +
+  coord_flip() +  
+   scale_y_continuous(name = "Percentage (%)", 
+                     limits = c(0, 35),  # Set y-axis limits from 0 to 100
+                     breaks = seq(0, 35, by = 10),  # Set breaks every 20%
+                     labels = function(x) paste0(x, "%")) +
+  theme_bw()+
+  # Flip to make labels readable
+  theme_minimal() +
+  labs(title = "Functional Enrichment in orangered3 Module",
+       x = "Description")+
+       #y = "Percentage (%)") +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1, color = "black"),
+        axis.text.y = element_text(color = "black"),
+        title = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"),
+   panel.grid = element_blank()) 
+    
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
+dev.off()
+```

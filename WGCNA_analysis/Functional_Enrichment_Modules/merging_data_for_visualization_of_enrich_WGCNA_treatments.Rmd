@@ -1,0 +1,473 @@
+---
+title: "mergin_data_for_enrich_for_Visuallization-WGCNA_comprehensive"
+author: "Sepideh"
+date: "2024-07-09"
+output:
+  toc: yes
+    toc_depth: '3'
+    df_print: paged
+  rmarkdown::html_document:
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+    toc_depth: 3
+    number_sections: yes
+editor_options:
+  chunk_output_type: inline
+  root.dir:"C:/Users/SepidehJafarian/Desktop/WGCNA_comprehensive_traits_isotope/Enrichment_comprehensive_results"
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(stringr)
+library(readr)
+library(plotly)
+library(htmlwidgets)
+library(tidyr)
+library(ggplot2)
+library(ggBubbles)
+library(magrittr)
+library(knitr)
+set.seed(641)
+```
+
+
+```{r , include=FALSE}
+wd="C:/Users/SepidehJafarian/Desktop/WGCNA_comprehensive_traits_isotope/Enrichment_comprehensive_results"
+
+file_path <- "C:/Users/SepidehJafarian/Desktop/WGCNA_comprehensive_traits_isotope/Enrichment_comprehensive_results"
+```
+
+
+
+```{r , include=FALSE}
+
+
+# List all CSV files
+csv_files <- list.files(file_path, pattern = "*.csv", full.names = TRUE)
+
+# Function to read and label each CSV file
+read_and_label <- function(file) {
+  df <- read.csv(file)
+  df$Module <- tools::file_path_sans_ext(basename(file))  # Add a Module column with the file name (without extension)
+  return(df)
+}
+
+# Read all CSV files and combine them into a single dataframe
+all_data <- do.call(rbind, lapply(csv_files, read_and_label))
+na_positions <- which(is.na(all_data), arr.ind = TRUE)
+
+
+```
+
+
+```{r , include=FALSE}
+# Extract the module color and level from the file names
+all_data <- all_data %>%
+  mutate(
+    Module = gsub("_Mercator_clusterprof", "", Module)  # Remove the suffix to get the module name
+  )
+
+# Select the relevant columns
+all_data <- all_data %>%
+  select(Description, Module, Count, pvalue, geneID)
+
+all_data <- all_data %>%
+  separate(Module, into = c("Level", "ModuleColor"), sep = "_", extra = "merge")
+
+```
+
+```{r , include=FALSE}
+# Create the bubble plot
+png(file = paste(wd, "enrichment_WGCNA.png", sep='/'),width=20,height=18,units="in",res=1200)
+en<- ggplot(all_data, aes(x = ModuleColor, y = Description, size = Count, color = pvalue)) +
+  geom_point(alpha = 0.7) +
+  scale_size_continuous(range = c(3, 20)) +  # Adjust the size range as needed
+  scale_color_gradient(low = "blue", high = "red") +  # Adjust the color gradient as needed
+  theme_minimal() +
+    theme(axis.text.x=element_text(colour="black"),
+         axis.text.y=  element_text(colour= "black"))+
+   theme(axis.text.x =element_text(size = 13))+
+  theme(text = element_text(size = 13),
+        strip.text = element_text(size = 5))+
+  theme(axis.text.y =element_text(size = 2))+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Gene Enrichment Analysis",
+       x = "Module",
+       y = "Description",
+       size = "Gene Count",
+       color = "p-value")
+print(en)
+dev.off()
+```
+
+
+```{r , include=FALSE}
+View(all_data)
+write.table(all_data, "summarized_table_wgcna_enrich_treatment.csv" , sep=",", row.names = FALSE)
+```
+
+
+```{r , include=FALSE}
+# Identify unique levels
+levels <- unique(all_data$Level)
+
+# Initialize an empty list to store the dataframes
+df_list <- list()
+
+# Loop over unique levels
+for (i in seq_along(levels)) {
+  # Subset the dataframe for the current level
+  df_subset <- all_data[all_data$Level == levels[i], ]
+  
+  # Store the subset dataframe in the list
+  df_list[[i]] <- df_subset
+}
+
+
+```
+
+
+```{r , include=FALSE}
+data1<- as.data.frame(df_list[1])
+View(data1)
+length(data1$Level)
+
+data2<- as.data.frame(df_list[2])
+View(data2)
+length(data2$Level)
+
+data3<- as.data.frame(df_list[3])
+View(data3)
+length(data3$Level)
+
+data4<- as.data.frame(df_list[4])
+View(data4)
+length(data4$Level)
+
+
+
+data5<- as.data.frame(df_list[5])
+View(data5)
+length(data5$Level)
+
+
+data6<- as.data.frame(df_list[6])
+View(data6)
+length(data6$Level)
+
+data7<- as.data.frame(df_list[7])
+View(data7)
+length(data7$Level)
+
+data8<- as.data.frame(df_list[8])
+View(data8)
+length(data8$Level)
+
+
+```
+
+
+
+
+```{r , include=FALSE}
+data_1.2<- rbind(data1, data2)
+View(data_1.2)
+```
+
+
+```{r , include=FALSE}
+png(file = paste(wd, "enrichment_WGCNA_level1&2.png", sep='/'),width=20,height=18,units="in",res=1200)
+data12 <- ggplot(data_1.2, aes(x = ModuleColor, y = Description, size = Count, color = pvalue)) +
+  geom_point(alpha = 0.7) +
+  scale_size_continuous(range = c(3, 8)) +  # Adjust the size range as needed
+  scale_color_gradient(low = "blue", high = "darkorange") +  # Adjust the color gradient as needed
+  theme_minimal() +
+    theme(axis.text.x=element_text(colour="black"),
+         axis.text.y=  element_text(colour= "black"))+
+   theme(axis.text.x =element_text(size = 13))+
+  theme(text = element_text(size = 13),
+        strip.text = element_text(size = 12))+
+  theme(axis.text.y =element_text(size = 12))+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Gene Enrichment Analysis-Mercator level 1&2",
+       x = "Module",
+       y = "Description",
+       size = "Gene Count",
+       color = "p-value")
+print(data12)
+dev.off()
+```
+
+
+
+
+```{r , include=FALSE}
+png(file = paste(wd, "enrichment_WGCNA_level3.png", sep='/'),width=18,height=18,units="in",res=1200)
+data30 <- ggplot(data3, aes(x = ModuleColor, y = Description, size = Count, color = pvalue)) +
+  geom_point(alpha = 0.7) +
+  scale_size_continuous(range = c(3, 8)) +  # Adjust the size range as needed
+  scale_color_gradient(low = "blue", high = "orange") +  # Adjust the color gradient as needed
+  theme_minimal() +
+    theme(axis.text.x=element_text(colour="black"),
+         axis.text.y=  element_text(colour= "black"))+
+   theme(axis.text.x =element_text(size = 13))+
+  theme(text = element_text(size = 13),
+        strip.text = element_text(size = 12))+
+  theme(axis.text.y =element_text(size = 4.5))+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Gene Enrichment Analysis_ Mercator level 3",
+       x = "Module",
+       y = "Description",
+       size = "Gene Count",
+       color = "p-value")
+print(data30)
+dev.off()
+```
+
+
+```{r , include=FALSE}
+png(file = paste(wd, "enrichment_WGCNA_level4.png", sep='/'),width=18,height=18,units="in",res=1200)
+data40 <- ggplot(data4, aes(x = ModuleColor, y = Description, size = Count, color = pvalue)) +
+  geom_point(alpha = 0.7) +
+  scale_size_continuous(range = c(3, 8)) +  # Adjust the size range as needed
+  scale_color_gradient(low = "blue", high = "red") +  # Adjust the color gradient as needed
+  theme_minimal() +
+    theme(axis.text.x=element_text(colour="black"),
+         axis.text.y=  element_text(colour= "black"))+
+   theme(axis.text.x =element_text(size = 13))+
+  theme(text = element_text(size = 13),
+        strip.text = element_text(size = 12))+
+  theme(axis.text.y =element_text(size = 3))+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Gene Enrichment Analysis_ Mercatore level 4",
+       x = "Module",
+       y = "Description",
+       size = "Gene Count",
+       color = "p-value")
+print(data40)
+dev.off()
+```
+
+```{r , include=FALSE}
+data40 <- ggplotly(data40)
+# Specify the file path where you want to save the HTML file
+html_file <- paste(wd, "enrichment_WGCNA_treatments_level4.html", sep = '/')
+
+# Save the interactive plot as HTML
+htmlwidgets::saveWidget(data40, html_file)
+```
+
+
+
+```{r , include=FALSE}
+png(file = paste(wd, "enrichment_WGCNA_level5.png", sep='/'),width=18,height=18,units="in",res=1200)
+data50 <- ggplot(data5, aes(x = ModuleColor, y = Description, size = Count, color = pvalue)) +
+  geom_point(alpha = 0.7) +
+  scale_size_continuous(range = c(3, 8)) +  # Adjust the size range as needed
+  scale_color_gradient(low = "blue", high = "red") +  # Adjust the color gradient as needed
+  theme_minimal() +
+    theme(axis.text.x=element_text(colour="black"),
+         axis.text.y=  element_text(colour= "black"))+
+   theme(axis.text.x =element_text(size = 13))+
+  theme(text = element_text(size = 13),
+        strip.text = element_text(size = 12))+
+  theme(axis.text.y =element_text(size = 5))+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Gene Enrichment Analysis_ Mercator level 5",
+       x = "Module",
+       y = "Description",
+       size = "Gene Count",
+       color = "p-value")
+print(data50)
+dev.off()
+```
+
+
+
+
+```{r , include=FALSE}
+png(file = paste(wd, "enrichment_WGCNA_level6.png", sep='/'),width=18,height=18,units="in",res=1200)
+data60 <- ggplot(data6, aes(x = ModuleColor, y = Description, size = Count, color = pvalue)) +
+  geom_point(alpha = 0.7) +
+  scale_size_continuous(range = c(3, 8)) +  # Adjust the size range as needed
+  scale_color_gradient(low = "blue", high = "red") +  # Adjust the color gradient as needed
+  theme_minimal() +
+    theme(axis.text.x=element_text(colour="black"),
+         axis.text.y=  element_text(colour= "black"))+
+   theme(axis.text.x =element_text(size = 13))+
+  theme(text = element_text(size = 13),
+        strip.text = element_text(size = 12))+
+  theme(axis.text.y =element_text(size = 10))+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Gene Enrichment Analysis_ Mercator level 6",
+       x = "Module",
+       y = "Description",
+       size = "Gene Count",
+       color = "p-value")
+print(data60)
+dev.off()
+```
+
+
+```{r , include=FALSE}
+png(file = paste(wd, "enrichment_WGCNA_level7.png", sep='/'),width=18,height=18,units="in",res=1200)
+data70 <- ggplot(data7, aes(x = ModuleColor, y = Description, size = Count, color = pvalue)) +
+  geom_point(alpha = 0.7) +
+  scale_size_continuous(range = c(3, 8)) +  # Adjust the size range as needed
+  scale_color_gradient(low = "blue", high = "red") +  # Adjust the color gradient as needed
+  theme_minimal() +
+    theme(axis.text.x=element_text(colour="black"),
+         axis.text.y=  element_text(colour= "black"))+
+   theme(axis.text.x =element_text(size = 13))+
+  theme(text = element_text(size = 13),
+        strip.text = element_text(size = 12))+
+  theme(axis.text.y =element_text(size = 10))+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Gene Enrichment Analysis_ Mercator level 7",
+       x = "Module",
+       y = "Description",
+       size = "Gene Count",
+       color = "p-value")
+print(data70)
+dev.off()
+```
+
+
+
+
+
+
+```{r , include=FALSE}
+png(file = paste(wd, "enrichment_WGCNA_level8.png", sep='/'),width=18,height=18,units="in",res=1200)
+data80 <- ggplot(data8, aes(x = ModuleColor, y = Description, size = Count, color = pvalue)) +
+  geom_point(alpha = 0.7) +
+  scale_size_continuous(range = c(3, 8)) +  # Adjust the size range as needed
+  scale_color_gradient(low = "blue", high = "red") +  # Adjust the color gradient as needed
+  theme_minimal() +
+    theme(axis.text.x=element_text(colour="black"),
+         axis.text.y=  element_text(colour= "black"))+
+   theme(axis.text.x =element_text(size = 13))+
+  theme(text = element_text(size = 13),
+        strip.text = element_text(size = 12))+
+  theme(axis.text.y =element_text(size = 10))+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Gene Enrichment Analysis_ Mercator level 8",
+       x = "Module",
+       y = "Description",
+       size = "Gene Count",
+       color = "p-value")
+print(data80)
+dev.off()
+```
+
+
+
+
+-------------------------------------------------------------------------------------------------
+
+## Now just extracting the modules which were significantly + or - correlated regarding the heatmap
+
+
+```{r , include=FALSE}
+#View(all_data)
+overlapp_moduls_candidate<- read.csv("summarized_table_wgcna_enrich_treatment.csv", sep=",", header = TRUE)
+specific_colors <- c("brown", "deeppink", "antiquewhite2","sienna3", "darkred", "tan", "orange","lightsteelblue1","orangered3" )
+
+specific_levels<- c("level5")
+
+sig_data_tr<- overlapp_moduls_candidate[overlapp_moduls_candidate$ModuleColor %in% specific_colors, ]
+View(sig_data_tr)
+
+sig_data_tr_lev <- sig_data_tr[sig_data_tr$Level %in% specific_levels, ]
+```
+
+#```{r , include=FALSE}
+
+specific_word2 <- "WRKY"
+matching_rows2 <- sig_data_tr[str_detect(sig_data_tr$Description, specific_word2), ]
+#```
+
+
+```{r , include=FALSE}
+png(file = paste(wd, "enrichment_WGCNA_significant_modules_treatments_all_levels5.png", sep='/'),width=19,height=18,units="in",res=1200)
+sigtrdata <- ggplot(sig_data_tr_lev, aes(x = ModuleColor, y = Description, size = Count, color = pvalue)) +
+  geom_point(alpha = 0.7) +
+  scale_size_continuous(range = c(3, 12)) +  # Adjust the size range as needed
+  scale_color_gradient(low = "yellow", high = "blue") +  # Adjust the color gradient as needed
+  theme_minimal() +
+    theme(axis.text.x=element_text(colour="black"),
+         axis.text.y=  element_text(colour= "black"))+
+   theme(axis.text.x =element_text(size = 15))+
+  theme(text = element_text(size = 13),
+        strip.text = element_text(size = 13))+
+  theme(axis.text.y =element_text(size = 7))+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Gene Enrichment Analysis (level 5)",
+       x = "Module",
+       y = "Description",
+       size = "Gene Count",
+       color = "p-value")
+print(sigtrdata)
+dev.off()
+```
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------
+# Extract the gene IDs from WGCNA genes
+```{r , include=FALSE}
+geneID_all_data_WGCNA <- unlist(strsplit(as.character(all_data$geneID), "/"))
+length(geneID_all_data_WGCNA)
+print(geneID_all_data_WGCNA)
+class(geneID_all_data_WGCNA)
+```
+
+# Extract the gene IDs from DEG results
+```{r , include=FALSE}
+geneID_deg_data <- deg_data$gene_id
+length(geneID_deg_data)
+class(geneID_deg_data)
+typeof(geneID_deg_data)
+print(geneID_deg_data)
+```
+
+#extracting common genes
+```{r , include=FALSE}
+common_gene_ids <- intersect(geneID_all_data_WGCNA , geneID_deg_data)
+View(common_gene_ids)
+common_gene_ids_table <- as.data.frame(common_gene_ids)
+colnames(common_gene_ids_table)[1]<- "geneID"
+View(common_gene_ids_table)
+print(length(common_gene_ids))
+
+```
+
+##checking for any duplication in common genes between two data set
+
+```{r , include=FALSE}
+duplicate_geneID <- duplicated(common_gene_ids_table$geneID)
+
+# Display the rows with duplicate geneID values
+common_gene_ids_table[duplicate_geneID, ]
+
+```
+
+
+```{r , include=FALSE}
+this<- all_data_split[common_gene_ids,]
+class(this)
+View(this)
+```
+
+
+```{r , include=FALSE}
+```
+
+
+```{r , include=FALSE}
+```
