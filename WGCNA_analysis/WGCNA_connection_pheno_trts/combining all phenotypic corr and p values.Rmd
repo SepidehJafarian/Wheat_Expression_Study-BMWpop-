@@ -1,0 +1,719 @@
+---
+title: "WGCNA-subset-phenotypinc & categorical traits- combining of corr and pvalues-modules"
+author: "Sepideh"
+date: "2024-18-06"
+output:
+  html_document:
+    toc: yes
+    toc_depth: '3'
+    df_print: paged
+  rmarkdown::html_document:
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+    toc_depth: 3
+    number_sections: yes
+editor_options:
+  chunk_output_type: inline
+  root.dir: "C:/Users/SepidehJafarian/Desktop/WGCNA_comprehensive_traits_isotope/bubbleplots_categorical and phenos_WGCNA"
+---
+
+
+
+```{r, setup, include=TRUE, echo=TRUE, eval=FALSE, warning=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(tidyr)
+library(ggplot2)
+library(dplyr)
+library(magrittr)
+library(knitr)
+library(ggplot2)
+library(ggBubbles)
+library(reshape2) # for reshaping the table
+set.seed(877)
+```
+
+```{r, include=TRUE}
+getwd()
+wd= "C:/Users/SepidehJafarian/Desktop/WGCNA_comprehensive_traits_isotope/bubbleplots_categorical and phenos_WGCNA"
+
+```
+
+
+```{r, include=TRUE}
+corr_data<- read.csv("moduleTraitCor_phenotypes.csv", sep=",", header=TRUE)
+View(corr_data)
+
+
+
+pval_data<- read.csv("moduleTraitPvalue_phenotypes.csv",  sep=",", header=TRUE)
+View(pval_data)
+```
+
+
+```{r, include=TRUE}
+
+correlation_data <- corr_data
+pvalue_data <- pval_data
+
+
+library(reshape2)
+colnames(correlation_data)
+colnames(pvalue_data)
+
+# Convert the data from wide to long format
+correlation_long <- melt(correlation_data, id.vars = "modules", variable.name = "Trait", value.name = "Correlation")
+pvalue_long <- melt(pvalue_data, id.vars = "modules", variable.name = "Trait", value.name = "Pvalue")
+
+# Ensure column names are correct and consistent in the long format data
+colnames(correlation_long)
+colnames(pvalue_long)
+
+
+merged_data <- merge(correlation_long, pvalue_long, by = c("Trait", "modules"))
+
+new_modules <- paste0("M", 1:76)
+
+# Step 2: Add this sequence as a new column to your data frame
+merged_data$new_modules <- new_modules
+
+# View the updated data frame
+View(merged_data)
+
+
+
+png(file=paste(wd, "bubbleplot_modul_Trait.png", sep='/') ,width=18,height=20,units="in",res=1200)
+ggplot(merged_data, aes(x = Trait, y = modules)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  # Use raw p-values for bubble sizes
+  scale_size_continuous(name = "Pvalue", range = c(4,4)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+  labs(title = " Modules_Traits correlation plots",
+       x = "Traits",
+       y = "Modules") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15),  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 14),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5)) +
+  theme(axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+dev.off()#
+```
+
+```{r, include=TRUE}
+View(merged_data)
+merged_data$modules <- sub("^ME", "", merged_data$modules)
+```
+
+
+
+```{r, include=TRUE}
+png(file=paste(wd, "bubbleplot_modul_Trait2.png", sep='/') ,width=24,height=15,units="in",res=1200)
+ggplot(merged_data, aes(x = modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  # Use raw p-values for bubble sizes
+  scale_size_continuous(name = "Pvalue", range = c(4.5,4.5)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+  labs(title = " Modules_Traits correlation plots",
+       x = "Modules",
+       y = "Traits") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14),  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 13),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5)) +
+  theme(axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+dev.off()#
+```
+
+
+
+
+
+
+# for all genotypes
+----------------------------------------------------------------------------------------------------
+```{r, include=TRUE}
+corr_data_genotype<- read.csv("moduleTraitCor_all_samples.csv", sep=",", header=TRUE)
+View(corr_data_genotype)
+
+
+
+pval_data_genotype<- read.csv("moduleTraitPvalue_all_samples.csv",  sep=",", header=TRUE)
+View(pval_data_genotype)
+```
+
+
+```{r, include=TRUE}
+
+correlation_data_genotype <- corr_data_genotype
+pvalue_data_genotype <- pval_data_genotype
+
+
+
+colnames(correlation_data_genotype)
+colnames(pvalue_data_genotype)
+
+# Convert the data from wide to long format
+correlation_long_genotype <- melt(correlation_data_genotype, id.vars = "modules", variable.name = "Trait", value.name = "Correlation")
+pvalue_long_genotype <- melt(pvalue_data_genotype, id.vars = "modules", variable.name = "Trait", value.name = "Pvalue")
+
+# Ensure column names are correct and consistent in the long format data
+colnames(correlation_long_genotype)
+colnames(pvalue_long_genotype)
+
+
+merged_data_genotype <- merge(correlation_long_genotype, pvalue_long_genotype, by = c("Trait", "modules"))
+
+
+
+new_modules <- paste0("M", 1:76)
+
+# Step 2: Add this sequence as a new column to your data frame
+merged_data_genotype$new_modules <- new_modules
+
+# View the updated data frame
+View(merged_data_genotype)
+
+
+png(file=paste(wd, "bubbleplot_modul_genotype.png", sep='/') ,width=18,height=20,units="in",res=1200)
+ggplot(merged_data_genotype, aes(x = Trait, y = modules)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  # Use raw p-values for bubble sizes
+  scale_size_continuous(name = "Pvalue", range = c(4,4)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+  labs(title = " Modules_Genotypes correlation plots",
+       x = "Genotypes",
+       y = "Modules") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15),  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 14),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5)) +
+  theme(axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+dev.off()#
+```
+
+```{r, include=TRUE}
+View(merged_data_genotype)
+merged_data_genotype$modules <- sub("^ME", "", merged_data_genotype$modules)
+```
+
+
+
+
+
+```{r, include=TRUE}
+png(file=paste(wd, "bubbleplot_modul_genotype2.png", sep='/') ,width=24,height=15,units="in",res=1200)
+ggplot(merged_data_genotype, aes(x = modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  # Use raw p-values for bubble sizes
+  scale_size_continuous(name = "Pvalue", range = c(5,5)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+  labs(title = " Modules_Traits correlation plots",
+       x = "Modules",
+       y = "Genotypes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 14),  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 15),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5)) +
+  theme(axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+dev.off()#
+```
+
+
+
+
+# for treatments
+----------------------------------------------------------------------------------------------------
+```{r, include=TRUE}
+corr_data_tr<- read.csv("moduleTraitCor_Drought_vs_control.csv", sep=",", header=TRUE)
+View(corr_data_tr)
+
+
+
+pval_data_tr<- read.csv("moduleTraitPvalue_Drought_vs_control.csv",  sep=",", header=TRUE)
+View(pval_data_tr)
+```
+
+
+```{r, include=TRUE}
+
+correlation_data_tr <- corr_data_tr
+pvalue_data_tr <- pval_data_tr
+
+
+
+colnames(correlation_data_tr)
+colnames(pvalue_data_tr)
+
+# Convert the data from wide to long format
+correlation_long_tr <- melt(correlation_data_tr, id.vars = "modules", variable.name = "Trait", value.name = "Correlation")
+pvalue_long_tr<- melt(pvalue_data_tr, id.vars = "modules", variable.name = "Trait", value.name = "Pvalue")
+
+# Ensure column names are correct and consistent in the long format data
+colnames(correlation_long_tr)
+colnames(pvalue_long_tr)
+
+
+merged_data_tr <- merge(correlation_long_tr, pvalue_long_tr, by = c("Trait", "modules"))
+
+
+new_modules <- paste0("M", 1:76)
+
+# Step 2: Add this sequence as a new column to your data frame
+merged_data_tr$new_modules <- new_modules
+
+# View the updated data frame
+View(merged_data_tr)
+
+
+png(file=paste(wd, "bubbleplot_modul_tr.png", sep='/') ,width=10,height=20,units="in",res=1200)
+ggplot(merged_data_tr, aes(x = Trait, y = modules)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  # Use raw p-values for bubble sizes
+  scale_size_continuous(name = "Pvalue", range = c(4,4)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+  labs(title = " Modules_Treatments correlation plots",
+       x = "Treatments",
+       y = "Modules") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15),  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 14),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5)) +
+  theme(axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+dev.off()#
+```
+
+```{r, include=TRUE}
+View(merged_data_tr)
+merged_data_tr$modules <- sub("^ME", "", merged_data_tr$modules)
+```
+
+
+
+```{r, include=TRUE}
+png(file=paste(wd, "bubbleplot_modul_tr2.png", sep='/') ,width=24,height=8,units="in",res=1200)
+ggplot(merged_data_tr, aes(x = modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  # Use raw p-values for bubble sizes
+  scale_size_continuous(name = "Pvalue", range = c(5,5)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+  labs(title = " Modules_Treatments correlation plots",
+       x = "Modules",
+       y = "Treatments") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 13),  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 15),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5)) +
+  theme(axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+dev.off()#
+```
+
+
+
+
+# for CID groups
+----------------------------------------------------------------------------------------------------
+```{r, include=TRUE}
+corr_data_cid<- read.csv("moduleTraitCor_h_vs_l.csv", sep=",", header=TRUE)
+View(corr_data_cid)
+
+
+
+pval_data_cid<- read.csv("moduleTraitPvalue_h_vs_l.csv",  sep=",", header=TRUE)
+View(pval_data_cid)
+```
+
+
+```{r, include=TRUE}
+
+correlation_data_cid <- corr_data_cid
+pvalue_data_cid <- pval_data_cid
+
+
+
+colnames(correlation_data_cid)
+colnames(pvalue_data_cid)
+
+# Convert the data from wide to long format
+correlation_long_cid<- melt(correlation_data_cid, id.vars = "modules", variable.name = "Trait", value.name = "Correlation")
+pvalue_long_cid<- melt(pvalue_data_cid, id.vars = "modules", variable.name = "Trait", value.name = "Pvalue")
+
+# Ensure column names are correct and consistent in the long format data
+colnames(correlation_long_cid)
+colnames(pvalue_long_cid)
+
+
+merged_data_cid <- merge(correlation_long_cid, pvalue_long_cid, by = c("Trait", "modules"))
+
+# Assuming your data frame is named df
+
+# Step 1: Create a sequence from M1 to M76
+new_modules <- paste0("M", 1:76)
+
+# Step 2: Add this sequence as a new column to your data frame
+merged_data_cid$new_modules <- new_modules
+
+# View the updated data frame
+print(merged_data_cid)
+
+
+
+png(file=paste(wd, "bubbleplot_modul_cid.png", sep='/') ,width=10,height=20,units="in",res=1200)
+ggplot(merged_data_cid, aes(x = Trait, y = modules)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  # Use raw p-values for bubble sizes
+  scale_size_continuous(name = "Pvalue", range = c(4,4)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+  labs(title = " Modules_WUE groups correlation plots",
+       x = "WUE groups",
+       y = "Modules") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 15),  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 14),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5)) +
+  theme(axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+dev.off()#
+```
+
+```{r, include=TRUE}
+View(merged_data_cid)
+merged_data_cid$modules <- sub("^ME", "", merged_data_cid$modules)
+```
+
+
+
+
+```{r, include=TRUE}
+png(file=paste(wd, "bubbleplot_modul_cid2.png", sep='/') ,width=20,height=8,units="in",res=1200)
+ggplot(merged_data_cid, aes(x = modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  # Use raw p-values for bubble sizes
+  scale_size_continuous(name = "Pvalue", range = c(4.5,4.5)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+  labs(title = " Modules_WUE groups correlation plots",
+       x = "Modules",
+       y = "WUE groups") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 13),  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 15),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5)) +
+  theme(axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+dev.off()#
+```
+## composer of all plots
+
+
+```{r, include=TRUE}
+
+
+library(patchwork)
+options(repr.plot.width = 20, repr.plot.height = 15)
+p1<- ggplot(merged_data, aes(x = new_modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  
+    scale_size("Pvalue", breaks=c(0.75, 0.5, 0.25, 0.0),labels=c(0.75, 0.5, 0.25, 0.0), range = c(5, .1)) +# Use raw p-values for bubble sizes
+  #scale_size_continuous(name = "Pvalue", range = c(3,9)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "darkred", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+
+  labs(title = "",
+       x = "Modules",
+       y = "Traits") +
+ 
+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 13),  # Hide x-axis text,  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 12),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5),
+         legend.position = "none") +
+  theme(axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+# Use a minimal theme
+
+
+print(p1)
+
+
+
+options(repr.plot.width = 20, repr.plot.height = 10)
+p2<- ggplot(merged_data_genotype, aes(x = new_modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +
+    scale_size("Pvalue", breaks=c(0.75, 0.5, 0.25, 0.0),labels=c(0.75, 0.5, 0.25, 0.0), range = c(5, .1)) +# Use raw p-values for bubble sizes
+  #scale_size_continuous(name = "Pvalue", range = c(3,9)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "darkred", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+ 
+  labs(title = " ",
+       x = "",
+       y = "Genotypes") +
+  theme(axis.text.x = element_blank(),  # Hide x-axis text,  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 13),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5),
+         legend.text = element_text(size = 13)
+        ) +
+  theme(#axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+   # Use a minimal theme
+ 
+
+
+print(p2)
+
+
+options(repr.plot.width = 20, repr.plot.height = 1)
+p3<- ggplot(merged_data_tr, aes(x = new_modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) + 
+    scale_size("Pvalue", breaks=c(0.75, 0.5, 0.25, 0.0),labels=c(0.75, 0.5, 0.25, 0.0), range = c(5, .1)) +# Use raw p-values for bubble sizes
+  #scale_size_continuous(name = "Pvalue", range = c(3,9)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "darkred", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+    # Optionally, you can set grid lines color
+
+  labs(title = " ",
+       x = "",
+       y = "Treatments") +
+  theme(axis.text.x = element_blank(),  # Hide x-axis text,  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 15),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5),
+         legend.position = "none") +
+  theme(#axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+    # Use a minimal theme
+ 
+
+
+print(p3)
+
+
+
+
+options(repr.plot.width = 20, repr.plot.height = 1)
+p4<- ggplot(merged_data_cid, aes(x = new_modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  
+    scale_size("Pvalue", breaks=c(0.75, 0.5, 0.25, 0.0),labels=c(0.75, 0.5, 0.25, 0.0), range = c(5, .1)) +# Use raw p-values for bubble sizes
+ # scale_size_continuous(name = "Pvalue", range = c(3,9)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "darkred", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+ 
+  labs(title = " Modules_groups correlation plots",
+       x = "",
+       y = "WUE groups") +
+  theme(axis.text.x = element_blank(),  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 15),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5),
+         legend.position = "none") +
+  theme(#axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+
+ 
+
+
+print(p4)
+
+png(file=paste(wd, "comprese.editted.2.png", sep='/') ,width=20,height=18,units="in",res=1200)
+
+p4 / p3 / p2 /p1 + plot_layout(heights = unit(c(5.5,3,12,8 ), c('cm', 'null'))) 
+ 
+
+
+dev.off()
+```
+
+
+
+
+```{r, include=TRUE}
+
+
+
+
+
+library(patchwork)
+options(repr.plot.width = 20, repr.plot.height = 15)
+p1<- ggplot(merged_data, aes(x = modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  
+    scale_size("Pvalue", breaks=c(0.75, 0.5, 0.25, 0.0),labels=c(0.75, 0.5, 0.25, 0.0), range = c(5, .1)) +# Use raw p-values for bubble sizes
+  #scale_size_continuous(name = "Pvalue", range = c(3,9)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "darkred", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+
+  labs(title = "",
+       x = "Modules",
+       y = "Traits") +
+ 
+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 13),  # Hide x-axis text,  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 12),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5),
+         legend.position = "none") +
+  theme(axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+# Use a minimal theme
+
+
+print(p1)
+
+
+
+options(repr.plot.width = 20, repr.plot.height = 10)
+p2<- ggplot(merged_data_genotype, aes(x = modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +
+    scale_size("Pvalue", breaks=c(0.75, 0.5, 0.25, 0.0),labels=c(0.75, 0.5, 0.25, 0.0), range = c(5, .1)) +# Use raw p-values for bubble sizes
+  #scale_size_continuous(name = "Pvalue", range = c(3,9)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "darkred", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+ 
+  labs(title = " ",
+       x = "",
+       y = "Genotypes") +
+  theme(axis.text.x = element_blank(),  # Hide x-axis text,  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 13),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5),
+        legend.text = element_text(size = 13)
+        ) +
+  theme(#axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+   # Use a minimal theme
+ 
+
+
+print(p2)
+
+
+options(repr.plot.width = 20, repr.plot.height = 1)
+p3<- ggplot(merged_data_tr, aes(x = modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) + 
+    scale_size("Pvalue", breaks=c(0.75, 0.5, 0.25, 0.0),labels=c(0.75, 0.5, 0.25, 0.0), range = c(5, .1)) +# Use raw p-values for bubble sizes
+  #scale_size_continuous(name = "Pvalue", range = c(3,9)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "darkred", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+    # Optionally, you can set grid lines color
+
+  labs(title = " ",
+       x = "",
+       y = "Treatments") +
+  theme(axis.text.x = element_blank(),  # Hide x-axis text,  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 15),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5),
+         legend.position = "none") +
+  theme(#axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+    # Use a minimal theme
+ 
+
+
+print(p3)
+
+
+
+
+options(repr.plot.width = 20, repr.plot.height = 1)
+p4<- ggplot(merged_data_cid, aes(x = modules, y = Trait)) +
+  geom_point(aes(size = Pvalue, color = Correlation)) +  
+    scale_size("Pvalue", breaks=c(0.75, 0.5, 0.25, 0.0),labels=c(0.75, 0.5, 0.25, 0.0), range = c(5, .1)) +# Use raw p-values for bubble sizes
+ # scale_size_continuous(name = "Pvalue", range = c(3,9)) +  # Adjust size range for better visualization
+  scale_color_gradient2(low = "blue", mid = "white", high = "darkred", midpoint = 0, 
+                        name = "Correlation", limits = c(-1, 1)) +  # Set limits for the color scale
+  theme_minimal() +
+ 
+  labs(title = " Modules_groups correlation plots",
+       x = "",
+       y = "WUE groups") +
+  theme(axis.text.x = element_blank(),  # Adjust size for x-axis text
+        axis.text.y = element_text(size = 15),                         # Adjust size for y-axis text
+        axis.title.x = element_text(size = 15),                        # Adjust size for x-axis title
+        axis.title.y = element_text(size = 15),                        # Adjust size for y-axis title
+        plot.title = element_text(size = 14, hjust = 0.5),
+         legend.position = "none") +
+  theme(#axis.text.x = element_text(color = "black"),
+        axis.text.y = element_text(color = "black"),
+        axis.title.x = element_text(color = "black"),
+        axis.title.y = element_text(color = "black"))
+
+ 
+
+
+print(p4)
+
+png(file=paste(wd, "comprese.editted.real_module_names.png", sep='/') ,width=20,height=18,units="in",res=1200)
+
+p4 / p3 / p2 /p1 + plot_layout(heights = unit(c(5.5,3,12,8 ), c('cm', 'null'))) 
+ 
+
+
+dev.off()
+```
